@@ -1,0 +1,67 @@
+/* * {
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+.welcome {
+    display: flex;
+    height:100vh;
+    width: 100%;
+    background-color: #8FA677;
+}
+
+.welcome-image{
+    height:100vh;
+    width: 70%;
+    position: relative;
+    background-image: url('assets/fondo-principal.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: #8FA677;
+}
+
+.title {
+    position: absolute;
+    height: 5em;
+    width: 100%;
+    background: #8FA677A1;
+    border: #8FA677 solid ;
+    top: 70%;
+    text-align: center;
+}
+
+.title h1 {
+    font-size: 8vw;
+}
+
+.welcome-buttoms{
+    display: flex;
+    position: relative;
+    height:100vh;
+    width: 30%;
+    flex-direction: column;
+}
+
+.welcome-buttoms img {
+    width: 12em;
+    height: 12em;
+    margin: 1.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border: #B4BD7E solid;
+}
+
+.welcome-buttoms button {
+    width: 14.5em;
+    height: 5em; 
+    margin: 1.5em;
+    margin-left: auto;
+    margin-right: auto;
+    background: #B4BD7E;
+    border: none;
+    cursor: pointer;
+}
+
+
+ */

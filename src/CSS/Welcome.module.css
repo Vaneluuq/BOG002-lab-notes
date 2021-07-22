@@ -1,0 +1,160 @@
+* {
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+.welcome {
+    display: flex;
+    height:100vh;
+    width: 100%;
+    background-color: #8FA677;
+}
+
+.welcomeImage{
+    height:100vh;
+    width: 70%;
+    position: relative;
+    background-image: url('../assets/fondo-principal.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: #8FA677;
+}
+
+.title {
+    position: absolute;
+    max-height: 14vh;
+    width: 100%;
+    background: #8FA677A1;
+    border: #8FA677 solid ;
+    top: 70%;
+    text-align: center;
+}
+
+.title h1 {
+    font-size: 6vw;
+}
+
+.welcomeButtons{
+    display: flex;
+    height:100vh;
+    width: 30%;
+    flex-direction: column;
+}
+
+ .welcomeButtons img {
+    width: 12em;
+    height: 12em;
+    margin: 1.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border: 5px solid #B4BD7E;
+    mix-blend-mode: multiply;
+} 
+
+.containerLogin,
+.containerRegister {
+    width: 12em;
+    height: 12em;
+    margin: 1.5em;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+}
+
+.welcomeButtons h1, h2 {
+    color: white;
+}
+
+.textLogin {
+    position: absolute;
+    top: 3em;
+ }
+
+ .titleLogin {
+    position: absolute;
+    top: 4.5em;
+    left: 1.1em;
+    cursor: pointer;
+ }
+
+ .textRegister{
+    position: absolute;
+    top: 3em;
+ }
+
+ .titleRegister {
+    position: absolute;
+    top: 4.5em;
+    left: 0.6em;
+    cursor: pointer;
+ }
+
+.about {
+    width: 10em;
+    height: 5em; 
+    margin: 2em;
+    margin-left: auto;
+    margin-right: auto;
+    background: #B4BD7E;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2em;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* .welcomeButtoms button {
+    width: 12em;
+    height: 12em;
+    margin: 1.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border: #B4BD7E solid;
+} */
+
+/* .botonIngreso, 
+.botonRegistro
+{
+    width: 12em;
+    height: 12em;
+    margin: 2em;
+    margin-left: auto;
+    margin-right: auto;
+    border: 5px solid #B4BD7E;
+    color: none;
+    mix-blend-mode: multiply;
+    color: white;
+    font-weight: bolder;
+}
+
+
+.botonIngreso{
+    background-image:  url('../assets/botonIngresar.jpg') ;
+    background-size: cover;
+}
+
+.botonRegistro {
+    background-image: url('../assets/botonRegistrarse.jpg');
+    background-size: cover;
+} */
+
+
+
+
+
+
+
