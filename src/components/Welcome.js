@@ -2,11 +2,11 @@
 // imrse - Import React, useState, useEffect
 // imr - Import React
 
-import React from 'react'
 import styles from '../CSS/Welcome.module.css'
-import botonIngresar from '../assets/botonIngresar.jpg'
-import botonRegistrarse from '../assets/botonRegistrarse.jpg'
-import  { Link } from 'react-router-dom'
+import imgIngresar from '../assets/botonIngresar.jpg'
+import imgRegistrarse from '../assets/botonRegistrarse.jpg'
+import { Link } from 'react-router-dom'
+import About from './about'
 
 export function Welcome(){
     return (
@@ -18,16 +18,22 @@ export function Welcome(){
          </div>
           <div className={styles.welcomeButtons}>
              <div className={styles.containerLogin}>
-                <img src={botonIngresar}/> 
+                <img src={imgIngresar} alt="Imagen de fondo"/> 
                 <h2 className={styles.textLogin}>¡Sigue viajando con nosotros!</h2>
-                <h1 className={styles.titleLogin} onClick={() => alert("Hello!")}>Ingresar</h1>
-             </div>
+                <Link to="/login">
+                   <h1 className={styles.titleLogin}>Ingresar</h1>
+                </Link>
+             </div> 
              <div className = {styles.containerRegister}>
-                <img src={botonRegistrarse}/> 
+                <img src={imgRegistrarse} alt="Imagen de fondo"/> 
                 <h2 className={styles.textRegister}>Empieza a viajar con nosotros</h2>
-                <h1 className={styles.titleRegister} onClick={() => alert("Hello!")}>Registrarse</h1>
+                <Link to ="/signup">
+                  <h1 className={styles.titleRegister}>Registrarse</h1>
+                </Link>
              </div>
-             <button className={styles.about}>About NoteWithMe</button> 
+             {/* <Link to ="/about"> */}
+                <button className={styles.about}>About NoteWithMe</button> 
+             {/* </Link> */}
           </div> 
         </div>
     )

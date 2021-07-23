@@ -95,9 +95,9 @@
 .about {
     width: 10em;
     height: 5em; 
-    margin: 2em;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 2em 4.3em;
+    /* margin-left: auto;
+    margin-right: auto; */
     background: #B4BD7E;
     border: none;
     cursor: pointer;
@@ -106,51 +106,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-/* .welcomeButtoms button {
-    width: 12em;
-    height: 12em;
-    margin: 1.5em;
-    margin-left: auto;
-    margin-right: auto;
-    border: #B4BD7E solid;
-} */
-
-/* .botonIngreso, 
-.botonRegistro
-{
-    width: 12em;
-    height: 12em;
-    margin: 2em;
-    margin-left: auto;
-    margin-right: auto;
-    border: 5px solid #B4BD7E;
-    color: none;
-    mix-blend-mode: multiply;
-    color: white;
-    font-weight: bolder;
-}
-
-
-.botonIngreso{
-    background-image:  url('../assets/botonIngresar.jpg') ;
-    background-size: cover;
-}
-
-.botonRegistro {
-    background-image: url('../assets/botonRegistrarse.jpg');
-    background-size: cover;
-} */
 
 
 
