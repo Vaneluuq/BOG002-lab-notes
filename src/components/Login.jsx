@@ -1,57 +1,105 @@
 import React from 'react'
-import styles from '../CSS/SignupAndLogin.module.css'
 import img from "../assets/login2.jpg"
-import Register from './Register.js'
+import Formulario from './Formulario'
+import Home from "./Home"
+import { useState, useEffect } from 'react';
+import  { auth } from '../firebase'
 
-const Login = (props) => {
-  const {
-    email,
-    setEmail,
-    password,
-    setPassword,
-    handleSignup,
-    handleLogin ,
-    hasAccount,
-    setHasAccount,
-    emailError,
-    passwordError
-  } = props
+
+const Login = () => {
+    const [user, setUser] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [emailError, setEmailError] = useState("");
+    const [passwordError, setPasswordError] = useState("")
+
+
+    const clearInput= () => {
+        setEmail('');
+        setPassword('');
+    }
+
+
+    const clearErrors = () => {
+        setEmailError('');
+        setPasswordError('');
+    }
+
+
+    const handleLogin = () => {
+    clearErrors()
+
+    auth.signInWithEmailAndPassword(email, password)
+    .catch(err => {
+        switch (err.code) {
+            case "auth/invalid-email":
+            case "auth/user-disabled":
+            case "auth/user-not-found":  
+                setEmailError(err.message);
+                break;
+            case "auth/wrong-password":
+                setPasswordError(err.message)
+                break;
+        }
+    })
+}
+
+    const authListener = () => {
+        auth.onAuthStateChanged((user) => {
+            if(user){
+                clearInput();
+                setUser(user);
+            } else {
+                setUser("");
+            }
+        })
+    }
+
+    useEffect(() => {
+        authListener();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
+    const handleLogout = () =>{
+        auth.signOut();
+     }
+
 
     return ( 
-      <section className={styles.formLogin}>
-      <div className={styles.img}>
-          <img src={img} alt="" />
-      </div>
-      <div className={styles.form}>
-        <div className={styles.itemsForm}>
-            <p>Inicia sesion en tu cuenta</p> <br /><br />
-              <input type="text" placeholder="Email" autoFocus required 
-                  value={email} 
-                  onChange={e => setEmail(e.target.value)} /> <br />
-              <p className={styles.errorMsg}>{emailError}</p> 
-              <input type="text" placeholder="Password" required 
-                  value={password}
-                  onChange={e => setPassword(e.target.value)} /> <br />
-              <p className={styles.errorMsg}>{passwordError}</p>
-          <div className={styles.btnLogin}><br />
-                <button onClick={handleLogin}>Iniciar sesion</button>
-                <p>Dont have accout <span onClick = {
-                  <Register></Register>
-                }>Sign Up</span></p>
-          </div>
-        </div>
-         <div>
-            <button className="btnGoogle"> 
-              <i class="fab fa-google fa-2x"></i> Google 
-            </button> <br />
-            <button className="btnfacebook"> 
-              <i class="fab fa-facebook-square fa-2x"></i> Facebook
-            </button>
-         </div>
-      </div>
-     </section>
-     );
+       <div>  
+          { user ? (
+            <Home handleLogout = {handleLogout}/>
+          ) : (
+            <Formulario
+            greeting = "Ingresa a tu cuenta de NoteWithMe"
+            btnLabel = "Ingresar"
+            image = {img}
+            email={email}
+            setEmail={setEmail} 
+            password={password} 
+            setPassword={setPassword} 
+            handleOption = {handleLogin}
+            emailError = {emailError}
+            passwordError = {passwordError}/>  
+          )
+         }
+       </div>
+    ) 
 }
  
 export default Login;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+  

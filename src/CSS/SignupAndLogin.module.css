@@ -23,7 +23,7 @@
     display: flex;
     height:100vh;
     width: 60%;
-    background: #8FA677;
+    background: #77A684;
     border-right: white solid;
     padding: 1em;
     flex-direction: column;
@@ -32,13 +32,14 @@
 
 .itemsForm{
     width: 60%;
-    height: 60vh;
+    height: 55vh;
     display: flex;
     text-align: center;
     align-items: center;
     flex-direction: column;
     padding-top: 2em;
     border-bottom: white solid;
+    margin-bottom: 2em;
 }
 
 
@@ -71,6 +72,8 @@
 
 .form button:hover {
     background-color: rgb(214, 212, 91);
-  }
+}
+
+
 
 

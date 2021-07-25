@@ -1,41 +1,93 @@
 import React from 'react'
-import styles from '../CSS/SignupAndLogin.module.css'
+import Formulario from './Formulario';
 import img from "../assets/login.jpg"
+import Home from "./Home"
+import { useState , useEffect} from 'react';
+import  { auth } from '../firebase'
 
 
 const Register = () => {
-    return (  
-        <section className={styles.formLogin}>
-        <div className={styles.form}>
-          <div className={styles.itemsForm}>
-              <p>Crea tu cuenta de NoteWithMe</p> <br /><br />
-                <input type="text" placeholder="Email" autoFocus required /> <br />
-                <p className={styles.errorMsg}></p> 
-                <input type="text" placeholder="Password" required /> <br />
-                <p className={styles.errorMsg}></p>
-                <input type="text" placeholder="Repeat password" required />
-                <p className={styles.errorMsg}></p>
-            <div className={styles.btnLogin}><br />
-                    <button>Registrarse</button>
-            </div>
-          </div>
-           <div>
-              <button className="btnGoogle"> 
-                <i class="fab fa-google fa-2x"></i> Google 
-              </button> <br />
-              <button className="btnfacebook"> 
-                <i class="fab fa-facebook-square fa-2x"></i> Facebook
-              </button>
-           </div>
-        </div>
-        <div className={styles.img}>
-            <img src={img} alt="" />
-        </div>
-       </section>
-    );
+  const [user, setUser] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("")
+ 
+
+  const clearInput= () => {
+        setEmail('');
+        setPassword('');
+    }
+  
+  const clearErrors = () => {
+        setEmailError('');
+        setPasswordError('');
+    }
+
+
+  const handleSignup = () => {
+        clearErrors();
+
+  auth.createUserWithEmailAndPassword(email, password)
+    .catch(err => {
+        switch (err.code) {
+            case "auth/email-already-in-use":
+            case "auth/invalid-email":
+              setEmailError(err.message);
+              break;
+            case "auth/weak-password":
+              setPasswordError(err.message)
+              break;
+        }
+    })
+}
+
+  const authListener = () => {
+      auth.onAuthStateChanged((user) => {
+          if(user){
+              clearInput();
+              setUser(user);
+          } else {
+              setUser("");
+          }
+      })
+  }
+
+  useEffect(() => {
+      authListener();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+
+  const handleLogout = () =>{
+        auth.signOut();
+  }
+
+  return(
+    <div>
+    { user ? 
+      ( <Home handleLogout = {handleLogout}/>
+      ) : ( 
+    <Formulario
+      greeting = "Crea tu cuenta de NoteWithMe"
+      btnLabel = "Registrarse"
+      image = {img}
+      email={email}
+      setEmail={setEmail} 
+      password={password} 
+      setPassword={setPassword} 
+      handleOption={handleSignup} 
+      emailError = {emailError}
+      passwordError = {passwordError}/>   
+     )}
+    </div>
+  )
 }
  
 export default Register;
+
+
+
 
 
 

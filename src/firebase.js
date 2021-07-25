@@ -1,4 +1,6 @@
 import firebase from 'firebase/app';
+import 'firebase/auth'
+
 // import 'firebase/firestore'
   
   // Your web app's Firebase configuration
@@ -14,7 +16,8 @@ import firebase from 'firebase/app';
   };
   // Initialize Firebase
   const fb = firebase.initializeApp(firebaseConfig);
+  const auth = fb.auth()
   // const db = fb.firestore();
   // firebase.analytics();
 
-  export default fb
+  export { auth } 
