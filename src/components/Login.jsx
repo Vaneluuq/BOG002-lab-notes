@@ -3,7 +3,7 @@ import img from "../assets/login2.jpg"
 import Formulario from './Formulario'
 import Home from "./Home"
 import { useState, useEffect } from 'react';
-import  { auth } from '../firebase'
+import { handleLogout,  loginUser, loginWithGoogle, authListener } from './firebaseAuth';
 
 
 const Login = () => {
@@ -19,7 +19,6 @@ const Login = () => {
         setPassword('');
     }
 
-
     const clearErrors = () => {
         setEmailError('');
         setPasswordError('');
@@ -29,7 +28,7 @@ const Login = () => {
     const handleLogin = () => {
     clearErrors()
 
-    auth.signInWithEmailAndPassword(email, password)
+    loginUser(email, password)
     .catch(err => {
         switch (err.code) {
             case "auth/invalid-email":
@@ -44,8 +43,16 @@ const Login = () => {
     })
 }
 
-    const authListener = () => {
-        auth.onAuthStateChanged((user) => {
+    const handleGoogle = () => {
+        loginWithGoogle().then(res => {
+                setUser(res.user)
+            })
+            .catch(err => { console.log(err) })
+          }
+
+
+    const listenerAuth = () => {
+        authListener((user) => {
             if(user){
                 clearInput();
                 setUser(user);
@@ -56,13 +63,9 @@ const Login = () => {
     }
 
     useEffect(() => {
-        authListener();
+        listenerAuth();
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-
-    const handleLogout = () =>{
-        auth.signOut();
-     }
 
 
     return ( 
@@ -71,7 +74,7 @@ const Login = () => {
             <Home handleLogout = {handleLogout}/>
           ) : (
             <Formulario
-            greeting = "Ingresa a tu cuenta de NoteWithMe"
+            greeting = "Ingresa a tu note NoteWithMe "
             btnLabel = "Ingresar"
             image = {img}
             email={email}
@@ -80,7 +83,9 @@ const Login = () => {
             setPassword={setPassword} 
             handleOption = {handleLogin}
             emailError = {emailError}
-            passwordError = {passwordError}/>  
+            passwordError = {passwordError}
+            handleGoogle = {handleGoogle}
+            />  
           )
          }
        </div>

@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Sedgwick+Ave+Display&display=swap');
+.containerSidebar{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+}
+
+.headerSidebar {
+  text-align: center;
+  padding-bottom: 2em;
+}
+
+.headerSidebar h1 {
+    font-family: 'Sedgwick Ave Display', cursive;
+}
+
+.createNote {
+    display: flex;
+    width: 100%;
+    min-height: 3em;
+    background: #78B380;
+    align-items: center;
+    margin-bottom: 2em;
+}
+
+.createNote button{
+    width:1.4em ;
+    height:1.2em ;
+    background: #d6e2c998;
+    border: none;
+    cursor: pointer;
+    margin-right: 0.5em;
+    color: white;
+    font-weight: bolder;
+    font-size: 2vw;
+}
+
+.createNote h3 {
+    padding: 0 1em;
+}
+
+.albumes {
+    width: 100%;
+}
+
+.titleAlbumes{
+    padding-top: 0.5em;
+    width: 100%;
+    height: 5vw;
+    background: #78B380;
+    font-size: 1.5vw;
+}
+
+.createAlbumes{
+    display: flex;
+    width: 100%;
+    height: 3em;
+    background: #78B380BA;
+    align-items: center;
+    margin-bottom: 2em;
+}
+
+.createAlbumes button{
+    width:1.4em ;
+    height:1.2em ;
+    background: #d6e2c998;
+    border: none;
+    cursor: pointer;
+    margin-right: 0.5em;
+    color: white;
+    font-weight: bolder;
+    font-size: 2vw;
+}
+
+.createAlbumes h3 {
+    padding: 0 1em;
+}

@@ -4,9 +4,15 @@
     width: 100%;
 }
 
-.formLogin p {
+.formLogin h1 {
    font-weight: bolder;
    font-size: 1.5em;
+   margin-bottom: 2em;
+}
+
+.itemsForm p {
+    color: rgb(238, 255, 0);
+    font-size: 0.85em;
 }
 
 .img {
@@ -19,7 +25,7 @@
     width: 100%;
 }
 
-.form{
+.containerForm{
     display: flex;
     height:100vh;
     width: 60%;
@@ -32,48 +38,32 @@
 
 .itemsForm{
     width: 60%;
-    height: 55vh;
+    height: 52vh;
     display: flex;
     text-align: center;
     align-items: center;
     flex-direction: column;
-    padding-top: 2em;
+    padding-top: 3vh;
     border-bottom: white solid;
-    margin-bottom: 2em;
+    margin-bottom: 3vh;
 }
 
 
-.form input {
+.itemsForm input {
     border: none;
-    width: 16em;
-    height: 2.5em;
+    width: 20em;
+    height: 3em;
     text-align: center;
     border-radius: 10px;
+    margin: 0.5em;
 }
 
-.form button {
-    position: relative;
-    border: none;
-    margin-top: 1.5em;
-    width: 13em;
-    height: 2.5em;
-    cursor: pointer;
-    font-size: 1em;
-    border-radius: 10px;
-    transition: all .5s;
+.providers {
+    display: flex;
+    flex-direction: column;
 }
 
-.form button i {
-  display: block;
-  position: absolute;
-  bottom: 0.1em;
-  left: 0.5em;
+.providers button {
+    padding-left: 2.5em;
 }
-
-.form button:hover {
-    background-color: rgb(214, 212, 91);
-}
-
-
-
 

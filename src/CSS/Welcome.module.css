@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Sedgwick+Ave+Display&display=swap');
+
 * {
     margin:0;
     padding:0;
@@ -29,6 +31,7 @@
     border: #8FA677 solid ;
     top: 70%;
     text-align: center;
+    font-family: 'Sedgwick Ave Display', cursive;
 }
 
 .title h1 {
@@ -44,8 +47,8 @@
 
  .welcomeButtons img {
     width: 12em;
-    height: 12em;
-    margin: 1.5em;
+    height: 11em;
+    margin: 1em;
     margin-left: auto;
     margin-right: auto;
     border: 5px solid #B4BD7E;
@@ -55,13 +58,14 @@
 .containerLogin,
 .containerRegister {
     width: 12em;
-    height: 12em;
-    margin: 1.5em;
+    height: 11em;
+    margin: 1em;
     margin-left: auto;
     margin-right: auto;
     position: relative;
     display: inline-block;
     text-align: center;
+    margin-top: 2em;
 }
 
 .welcomeButtons h1, h2 {
@@ -70,7 +74,9 @@
 
 .textLogin {
     position: absolute;
-    top: 3em;
+    top: 1em;
+    font-size: 1.5em;
+    padding: 0.5em 1em;
  }
 
  .titleLogin {
@@ -82,7 +88,9 @@
 
  .textRegister{
     position: absolute;
-    top: 3em;
+    top: 1em;
+    font-size: 1.5em;
+    padding: 0.5em 0.5em;
  }
 
  .titleRegister {
@@ -94,10 +102,8 @@
 
 .about {
     width: 10em;
-    height: 5em; 
+    height: 3.5em; 
     margin: 2em 4.3em;
-    /* margin-left: auto;
-    margin-right: auto; */
     background: #B4BD7E;
     border: none;
     cursor: pointer;

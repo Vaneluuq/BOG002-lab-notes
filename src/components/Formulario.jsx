@@ -1,4 +1,7 @@
-import styles from '../CSS/SignupAndLogin.module.css'
+import React from 'react'
+import LoginCSS from '../CSS/SignupAndLogin.module.css'
+import Button from './Botones';
+import { Link } from 'react-router-dom';
 
 const Formulario = (props) => {
    const {
@@ -7,6 +10,7 @@ const Formulario = (props) => {
     password,
     setPassword,
     handleOption,
+    handleGoogle,
     emailError,
     passwordError, 
     btnLabel,
@@ -14,60 +18,43 @@ const Formulario = (props) => {
     image
 } = props
 
+ const emailChange = (e) => setEmail(e.target.value);
+
+ const passwordChange = (e) => setPassword(e.target.value);
+
+ const enviarDatos = (e) => e.preventDefault();
+
     return (
-     <section className={styles.formLogin}>
-        <div className={styles.form}>
-           <div className={styles.itemsForm}>
-               <p>{greeting}</p> <br /><br />
-                <input 
-                    type="text" 
-                    placeholder="Email" 
-                    autoFocus 
-                    required 
-                    value={email} 
-                    onChange={e => setEmail(e.target.value)}
-                    /> <br />
-                <p className={styles.errorMsg}>{emailError}</p> 
-                <input 
-                    type="password" 
-                    placeholder="Password" 
-                    required
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
-                    /> <br />
-                <p className={styles.errorMsg}>{passwordError}</p>
-                <div className={styles.btnLogin}><br />
-                    <button type="button" onClick={handleOption}>{btnLabel}</button>
+        <section className={LoginCSS.formLogin}>
+            <div className={LoginCSS.containerForm}>
+                <form className={LoginCSS.itemsForm} onSubmit={enviarDatos}>
+                    <h1>{greeting}</h1>
+                    <input type="text" placeholder="Email" autoFocus required 
+                            value={email} onChange={emailChange}/>
+                    <p className={LoginCSS.errorMsg}>{emailError}</p>
+                    <input type="password" placeholder="Password" required
+                            value={password} onChange={passwordChange}/>
+                    <p className={LoginCSS.errorMsg}>{passwordError}</p> 
+                       <Button onClick = {handleOption} 
+                        type = "submit"
+                        btnname = {btnLabel}/>
+                </form> 
+                <div className={LoginCSS.providers}>
+                        <Button onClick = { handleGoogle }
+                        classbtn = "fab fa-google fa-2x" 
+                        btnname = "Continuar con Google"/> 
+                    <Button 
+                        classbtn = "fab fa-facebook-square fa-2x" 
+                        btnname = "Continuar con Facebook"/>
                 </div>
-           </div>
-           <div>
-              <button className="btnGoogle"> 
-                 <i class="fab fa-google fa-2x"></i> Google 
-              </button> <br />
-              <button className="btnfacebook"> 
-                 <i class="fab fa-facebook-square fa-2x"></i> Facebook
-              </button>
-           </div>
-        </div>
-        <div className={styles.img}>
-            <img src={image} alt="" />
-        </div>
-     </section>
+            </div> 
+            <div className={LoginCSS.img}>
+                <img src={image} alt="" />
+            </div>
+        </section>
     );
 }
  
 export default Formulario;
 
 
-
-
-
-
-// {hasAccount ? (
-//     //    <>
-//          <button type="button" onClick={handleLogin}>{btnLabel}</button>
-//        {/* </>
-//    ):(   
-//        <>
-//          <button type="button" onClick={handleSignup}>{btnLabel}</button>
-//        </>)} */}

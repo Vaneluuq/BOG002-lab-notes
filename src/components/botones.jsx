@@ -1,23 +1,25 @@
-function LoginButton(props) {
+import React from 'react'
+import ButtonCSS from '../CSS/Buttons.module.css'
+
+
+function Button(props) {
+  const {
+     onClick,
+     classbtn, 
+     btnname,
+     type
+  } = props
+
     return (
-      <button onClick={props.onClick}>
-        Login
-      </button>
-    );
-  }
-  
-  function LogoutButton(props) {
-    return (
-      <button onClick={props.onClick}>
-        Logout
+       <button className={ButtonCSS.button} 
+        onClick={onClick} 
+        type={type}>
+        <i className={classbtn}></i> 
+         {btnname}
       </button>
     );
   }
 
-  function signUpButton(props) {
-    return (
-      <button onClick={props.onClick}>
-           Signup
-      </button>
-    );
-  }
+  export default Button
+
+  

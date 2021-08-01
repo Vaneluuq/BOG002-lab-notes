@@ -6,7 +6,6 @@ import styles from '../CSS/Welcome.module.css'
 import imgIngresar from '../assets/botonIngresar.jpg'
 import imgRegistrarse from '../assets/botonRegistrarse.jpg'
 import { Link } from 'react-router-dom'
-import About from './about'
 
 export function Welcome(){
     return (
@@ -26,14 +25,14 @@ export function Welcome(){
              </div> 
              <div className = {styles.containerRegister}>
                 <img src={imgRegistrarse} alt="Imagen de fondo"/> 
-                <h2 className={styles.textRegister}>Empieza a viajar con nosotros</h2>
+                <h2 className={styles.textRegister}>¡Empieza a viajar con nosotros!</h2>
                 <Link to ="/signup">
                   <h1 className={styles.titleRegister}>Registrarse</h1>
                 </Link>
              </div>
-             {/* <Link to ="/about"> */}
+              <Link to ="/about">
                 <button className={styles.about}>About NoteWithMe</button> 
-             {/* </Link> */}
+              </Link> 
           </div> 
         </div>
     )

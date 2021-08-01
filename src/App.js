@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import './App.css';
 import { Welcome } from './components/Welcome'
 import Home from './components/Home.jsx'
 import Login from './components/Login.jsx'
-import About from './components/about';
+import About from './components/About';
 import Register from './components/Register';
 
 
@@ -15,7 +15,8 @@ import {
 
 function App() {
   return (
-    <Router>
+    <Fragment>
+      <Router>
       <div className="container">
       <Switch>
         <Route path="/" exact>
@@ -36,6 +37,7 @@ function App() {
       </Switch> 
       </div>
     </Router>
+    </Fragment>
   );
 }
 

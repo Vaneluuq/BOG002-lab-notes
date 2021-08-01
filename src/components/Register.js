@@ -3,7 +3,9 @@ import Formulario from './Formulario';
 import img from "../assets/login.jpg"
 import Home from "./Home"
 import { useState , useEffect} from 'react';
-import  { auth } from '../firebase'
+import { handleLogout, createUser , loginWithGoogle, authListener } from './firebaseAuth';
+
+
 
 
 const Register = () => {
@@ -12,6 +14,7 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("")
+  const [displayName, setDisplayName] = useState(null)
  
 
   const clearInput= () => {
@@ -27,9 +30,8 @@ const Register = () => {
 
   const handleSignup = () => {
         clearErrors();
-
-  auth.createUserWithEmailAndPassword(email, password)
-    .catch(err => {
+      createUser(email, password)
+        .catch(err => {
         switch (err.code) {
             case "auth/email-already-in-use":
             case "auth/invalid-email":
@@ -42,31 +44,37 @@ const Register = () => {
     })
 }
 
-  const authListener = () => {
-      auth.onAuthStateChanged((user) => {
+const handleGoogle = () => {
+  loginWithGoogle()
+  .then(res => {
+      setUser(res.user)
+      setDisplayName(res.user.displayName)
+  })
+  .catch(err => { console.log(err) })
+}
+
+  const listenerAuth = () => {
+    authListener((user) => {
           if(user){
               clearInput();
               setUser(user);
           } else {
-              setUser("");
+            setUser("");
           }
       })
   }
 
   useEffect(() => {
-      authListener();
+      listenerAuth();
       // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
 
-  const handleLogout = () =>{
-        auth.signOut();
-  }
 
   return(
     <div>
     { user ? 
-      ( <Home handleLogout = {handleLogout}/>
+        (<Home handleLogout = {handleLogout}/>
       ) : ( 
     <Formulario
       greeting = "Crea tu cuenta de NoteWithMe"
@@ -77,8 +85,10 @@ const Register = () => {
       password={password} 
       setPassword={setPassword} 
       handleOption={handleSignup} 
+      handleGoogle = {handleGoogle}
       emailError = {emailError}
-      passwordError = {passwordError}/>   
+      passwordError = {passwordError}
+      />   
      )}
     </div>
   )
