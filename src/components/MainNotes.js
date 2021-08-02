@@ -2,12 +2,16 @@ import React from 'react'
 import NotesCSS from '../CSS/MainNotes.module.css'
 import Notes from './Notes';
 
+
 const MainNotes = (props) => {
     const {
       notes, 
-      onDeleteNote
+      onDeleteNote,
+      datos,
+      setDatos
     } = props
   
+
     return (  
         <div className={NotesCSS.containerMainNotes}>
           {notes.map((note)=>(
@@ -19,6 +23,8 @@ const MainNotes = (props) => {
                     minute: "2-digit"
                 })}
                 onClickTrash = {()=> onDeleteNote(note.id)}
+                datos = {datos}
+                setDatos = {setDatos} 
                 />       
             ))}
         </div>

@@ -1,4 +1,4 @@
-import  { fb, google } from '../firebase'
+import  { fb, google, db } from '../firebase'
 
 
 
@@ -14,6 +14,24 @@ const authListener = (callback) => fb.auth().onAuthStateChanged(callback)
 
 
 
-export { handleLogout, loginUser, loginWithGoogle, authListener, createUser }
+
+const getNotes = (callback) => db.collection('notes').orderBy('date', 'desc').onSnapshot(callback);
+
+const createNotes =(notesObj)=> db.collection('notes').doc().set({notesObj});
+
+
+const newNote = (noteEdit, id) => {
+  db.collection('posts').doc(id).update({
+    mensaje: noteEdit,
+  });
+};
+
+const deleteNote = (id) => { db.collection('posts').doc(id).delete()};
+
+
+
+export { handleLogout, loginUser, loginWithGoogle, authListener, createUser,
+getNotes, createNotes, newNote, deleteNote
+}
 
 
