@@ -1,9 +1,9 @@
 import React from 'react'
 import img from "../assets/login2.jpg"
 import Formulario from './Formulario'
-import Home from "./Home"
 import { useState, useEffect } from 'react';
-import { handleLogout,  loginUser, loginWithGoogle, authListener } from './firebaseAuth';
+import {loginUser, loginWithGoogle, authListener } from './firebaseAuth';
+import { Redirect } from 'react-router-dom';
 
 
 const Login = () => {
@@ -71,7 +71,8 @@ const Login = () => {
     return ( 
        <div>  
           { user ? (
-            <Home handleLogout = {handleLogout}/>
+           <Redirect to ="/home"></Redirect>
+        //  <Home handleLogout = {handleLogout}/>
           ) : (
             <Formulario
             greeting = "Ingresa a tu note NoteWithMe "

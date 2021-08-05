@@ -1,26 +1,52 @@
 import React from 'react'
 import NotesCSS from '../CSS/Notes.module.css'
-import edit from '../assets/pencil-striped-symbol-for-interface-edit-buttons_icon-icons.com_56782.svg'
 import trash from '../assets/trashcan_trash_delete_recycle_bin_icon_176937.svg'
-import check  from '../assets/check.svg'
+import { createNotes } from './firebaseAuth'
+import Modal from 'react-modal';
+import { getNotes } from './firebaseAuth';
+Modal.setAppElement('#root');
+
+const customStyles = {
+    overlay: {
+        backgroundColor: 'rgba(255, 255, 255, 0.7)'
+      },
+    content: {
+      backgroundColor: '#F3F1F1',
+      border: '1px solid #ccc',
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      transform: 'translate(-50%, -50%)',
+    },
+  };
 
 const Notes = (props) => {
     const {
      title,
      body,
-     lastModified,
-     onClickEdit,
      onClickTrash,
-     currentId, 
-     datos,
-     setDatos
+     datos, 
+     setDatos, 
+     modalIsOpen, 
+     setIsOpen
     } = props
+
+    function closeModal() {
+      setIsOpen(false);
+    }
+        
 
     const handleSubmit = e => {
         e.preventDefault();
-        console.log('enviando datos...' + datos.title + ' ' + datos.body)
-    }
-
+        createNotes({   
+          id: datos.id,
+          title:  datos.title,
+          body: datos.body, 
+          lastModified: time
+    })
+     closeModal()
+ }
   
     const handleInputChange = (e) => {
         setDatos({
@@ -29,10 +55,26 @@ const Notes = (props) => {
         })
     }
 
-    
+    let time = new Date().toLocaleDateString("en-GB",{
+        hour: "2-digit",
+        minute: "2-digit"})
 
+    const handleAfterCloseFunc = () => {
+        getNotes((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+             console.log(doc.data())
+         })})
+    }
+
+  
     return ( 
-      <form className ={NotesCSS.notesMain} onSubmit={handleSubmit}>
+    <Modal
+    isOpen={modalIsOpen}
+    style={customStyles}
+    onAfterClose={handleAfterCloseFunc}
+    onRequestClose={closeModal}
+    >
+        <form className ={NotesCSS.notesMain} onSubmit={handleSubmit}>
             <input type="text" 
                 id="title" 
                 placeholder="Añade un titulo" 
@@ -49,20 +91,42 @@ const Notes = (props) => {
                 />
 
             <div className={NotesCSS.opcionesNotes}>
-                {currentId === "" 
-                ? ( <img type="submit" src={check} alt="Submit" />) 
-                : ( <img type="submit" src={edit} alt="Submit" onClick={onClickEdit} />)}
+            <button type="submit"><i class="far fa-check-circle"></i> </button>
             <img type="submit" onClick={onClickTrash} src={trash} alt="" />
-
-                <p>{lastModified}</p>
+            <p>{time}</p>
            </div>
      </form>
-
-     );
+    </Modal>
+    );
 }
 
 export default Notes;
 
+
+
+
+
+
+
+
+    // const newData = () => {
+    //     {new Date(lastModified).toLocaleDateString("en-GB",{
+    //         hour: "2-digit",
+    //         minute: "2-digit"  })}
+    // }
+   
+
+
+
+
+       {/* {datos === "" 
+                ? (<button type="submit"><i class="far fa-check-circle"></i></button>)
+                :(<button type="submit"><i class="far fa-edit"></i></button> )} */}
+
+
+
+   // ? ( <img type="submit" src={check} alt="img" />) 
+                // : ( <img type="submit" src={edit} alt="Submit"/>)}
 
 {/* <div className={NotesCSS.opcionesNotes}>
                 <img type="button" onClick={onClickEdit} src={edit} alt="" />

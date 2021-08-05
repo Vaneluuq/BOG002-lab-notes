@@ -1,7 +1,7 @@
 .notesMain {
-    margin: 1em 2em;
-    width: 15em;
-    height: 14em;
+    /* margin: 1em 2em; */
+    width: 20em;
+    height: 18em;
     background: #8FA677;
     display: flex;
     text-align: center;
@@ -21,17 +21,24 @@
 
 .opcionesNotes img {
     cursor: pointer;
-    width: 1em;
-    height: 1em;
+    width: 1.2em;
+    height: 1.2em;
+}
+
+.opcionesNotes button {
+    cursor: pointer;
+    width: 1.8em;
+    height: 1.8em;
 }
 
 .notesMain input {
     width: 90%;
     border: none;
-    height: 20%;
+    height: 15%;
     background: #8FA677;
     padding: 1em;
     text-align: center;
+    margin-top: 5%;
 }
 
 .notesMain textarea {

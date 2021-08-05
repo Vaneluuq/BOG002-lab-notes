@@ -1,10 +1,9 @@
 import React from 'react'
 import Formulario from './Formulario';
 import img from "../assets/login.jpg"
-import Home from "./Home"
 import { useState , useEffect} from 'react';
-import { handleLogout, createUser , loginWithGoogle, authListener } from './firebaseAuth';
-
+import { createUser , loginWithGoogle, authListener } from './firebaseAuth';
+import { Redirect } from 'react-router-dom';
 
 
 
@@ -74,7 +73,7 @@ const handleGoogle = () => {
   return(
     <div>
     { user ? 
-        (<Home handleLogout = {handleLogout}/>
+        (  <Redirect to ="/home"></Redirect>
       ) : ( 
     <Formulario
       greeting = "Crea tu cuenta de NoteWithMe"

@@ -1,6 +1,6 @@
 import  { fb, google, db } from '../firebase'
 
-
+//firebase auth 
 
 const handleLogout = () => fb.auth().signOut() 
 
@@ -14,24 +14,24 @@ const authListener = (callback) => fb.auth().onAuthStateChanged(callback)
 
 
 
+// firestore 
+
+const createNotes =(notesObj)=> db.collection('notes').doc().set(notesObj);
 
 const getNotes = (callback) => db.collection('notes').orderBy('date', 'desc').onSnapshot(callback);
 
-const createNotes =(notesObj)=> db.collection('notes').doc().set({notesObj});
 
-
-const newNote = (noteEdit, id) => {
-  db.collection('posts').doc(id).update({
+const editingNote = (noteEdit, id) => {
+  db.collection('notes').doc(id).update({
     mensaje: noteEdit,
   });
 };
 
-const deleteNote = (id) => { db.collection('posts').doc(id).delete()};
+const deleteNote = (id) => { db.collection('notes').doc(id).delete()};
 
 
 
 export { handleLogout, loginUser, loginWithGoogle, authListener, createUser,
-getNotes, createNotes, newNote, deleteNote
-}
+getNotes, createNotes, editingNote , deleteNote}
 
 

@@ -1,7 +1,6 @@
 import React from 'react'
 import LoginCSS from '../CSS/SignupAndLogin.module.css'
 import Button from './Botones';
-import { Link } from 'react-router-dom';
 
 const Formulario = (props) => {
    const {
