@@ -1,53 +1,45 @@
 import React from 'react'
 import NotesCSS from '../CSS/Notes.module.css'
 import trash from '../assets/trashcan_trash_delete_recycle_bin_icon_176937.svg'
-import { createNotes } from './firebaseAuth'
 import Modal from 'react-modal';
-import { getNotes } from './firebaseAuth';
-Modal.setAppElement('#root');
+import { useState } from 'react';
+import uuid from 'react-uuid'
 
-const customStyles = {
-    overlay: {
-        backgroundColor: 'rgba(255, 255, 255, 0.7)'
-      },
-    content: {
-      backgroundColor: '#F3F1F1',
-      border: '1px solid #ccc',
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      transform: 'translate(-50%, -50%)',
-    },
-  };
+Modal.setAppElement('#root');
 
 const Notes = (props) => {
     const {
-     title,
-     body,
-     onClickTrash,
-     datos, 
-     setDatos, 
-     modalIsOpen, 
-     setIsOpen
+     addNotesCollection, 
+     closeModal, 
+     title, 
+     body, 
+     deleteNote, 
+     addOrEditNotes
     } = props
 
-    function closeModal() {
-      setIsOpen(false);
-    }
-        
+    const [datos, setDatos] = useState({ 
+          title: '',
+          body: '',
+        })   
 
+
+//recibe el evento del formulario y envia a la coleccion la data
     const handleSubmit = e => {
         e.preventDefault();
-        createNotes({   
-          id: datos.id,
-          title:  datos.title,
-          body: datos.body, 
-          lastModified: time
-    })
-     closeModal()
- }
+        addNotesCollection ({  ...datos, 
+        lastModified: time  })        
+        closeModal()
+      }
+
+
+// //funcion del tiempo para la verificacion de hora de creacion y modificacion de la nota 
+    let time = new Date().toLocaleDateString("en-GB",{
+        hour: "2-digit",
+        minute: "2-digit"})
+
+ 
   
+// se aguardan en datos los eventos sobre los input para title y body
     const handleInputChange = (e) => {
         setDatos({
             ...datos,
@@ -55,25 +47,8 @@ const Notes = (props) => {
         })
     }
 
-    let time = new Date().toLocaleDateString("en-GB",{
-        hour: "2-digit",
-        minute: "2-digit"})
-
-    const handleAfterCloseFunc = () => {
-        getNotes((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-             console.log(doc.data())
-         })})
-    }
-
   
     return ( 
-    <Modal
-    isOpen={modalIsOpen}
-    style={customStyles}
-    onAfterClose={handleAfterCloseFunc}
-    onRequestClose={closeModal}
-    >
         <form className ={NotesCSS.notesMain} onSubmit={handleSubmit}>
             <input type="text" 
                 id="title" 
@@ -85,18 +60,17 @@ const Notes = (props) => {
                 />
             <textarea id="body" 
                 placeholder="Escribe tu nota aqui"
-                value={body}
+                 value={body}
                 name="body"
                 onChange={handleInputChange}
                 />
 
             <div className={NotesCSS.opcionesNotes}>
             <button type="submit"><i class="far fa-check-circle"></i> </button>
-            <img type="submit" onClick={onClickTrash} src={trash} alt="" />
+            <img type="submit" onClick= {deleteNote} src={trash} alt="" />
             <p>{time}</p>
            </div>
      </form>
-    </Modal>
     );
 }
 
@@ -108,13 +82,104 @@ export default Notes;
 
 
 
+// const Notes = (props) => {
+//     const {
+//      title,
+//      body,
+//      onClickTrash,
+//      modalIsOpen, 
+//      setIsOpen, 
+//      addNotesToScreen,
+//      datos, 
+//      setDatos
+//     } = props
 
-    // const newData = () => {
-    //     {new Date(lastModified).toLocaleDateString("en-GB",{
-    //         hour: "2-digit",
-    //         minute: "2-digit"  })}
-    // }
-   
+
+// //funcion cerrar modal
+//     function closeModal() {
+//       setIsOpen(false);
+//     }
+
+
+// //recibe el evento del formulario y envia a la coleccion la data
+//     const handleSubmit = e => {
+//         e.preventDefault();
+//         addNotesToScreen({  ...datos, 
+//            lastModified: time
+//          })
+           
+//     //  closeModal()
+//  }
+  
+// // se aguardan en datos los eventos sobre los input para title y body
+//     const handleInputChange = (e) => {
+//         setDatos({
+//             ...datos,
+//             [e.target.name] : e.target.value
+//         })
+//     }
+
+// //funcion del tiempo para la verificacion de hora de creacion y modificacion de la nota 
+//     let time = new Date().toLocaleDateString("en-GB",{
+//         hour: "2-digit",
+//         minute: "2-digit"})
+
+
+//  // devuelve un evento al cerrar la ventana modal 
+//     const handleAfterCloseFunc = () => {
+
+//     }
+
+
+  
+//     return ( 
+//     // <Modal
+//     // isOpen={modalIsOpen}
+//     // style={customStyles}
+//     // onAfterClose={handleAfterCloseFunc}
+//     // onRequestClose={closeModal}
+//     // >
+//         <form className ={NotesCSS.notesMain} onSubmit={handleSubmit}>
+//             <input type="text" 
+//                 id="title" 
+//                 placeholder="Añade un titulo" 
+//                 autoFocus required 
+//                 name="title"
+//                 value={title}
+//                 onChange={handleInputChange}
+//                 />
+//             <textarea id="body" 
+//                 placeholder="Escribe tu nota aqui"
+//                 value={body}
+//                 name="body"
+//                 onChange={handleInputChange}
+//                 />
+
+//             <div className={NotesCSS.opcionesNotes}>
+//             <button type="submit"><i class="far fa-check-circle"></i> </button>
+//             <img type="submit" onClick={onClickTrash} src={trash} alt="" />
+//             <p>{time}</p>
+//            </div>
+//      </form>
+//     // </Modal>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -125,24 +190,4 @@ export default Notes;
 
 
 
-   // ? ( <img type="submit" src={check} alt="img" />) 
-                // : ( <img type="submit" src={edit} alt="Submit"/>)}
-
-{/* <div className={NotesCSS.opcionesNotes}>
-                <img type="button" onClick={onClickEdit} src={edit} alt="" />
-                <img type="button" onClick={onClickTrash} src={trash} alt="" />
-                <p>{lastModified}</p>
-           </div> */}
-
-// 
-// //  const [status, setStatus] = useState(false)
-
-//   const addNote = () => {
-//   const newNote = {
-//     id: uuid(),
-//     title: "Untitle note",
-//     body:"",
-//     lastModified: Date.now()
-//   }
-//   setNotes([newNote, ...notes])
-//  }
+  

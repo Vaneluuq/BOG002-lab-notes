@@ -18,16 +18,12 @@ const authListener = (callback) => fb.auth().onAuthStateChanged(callback)
 
 const createNotes =(notesObj)=> db.collection('notes').doc().set(notesObj);
 
-const getNotes = (callback) => db.collection('notes').orderBy('date', 'desc').onSnapshot(callback);
+const getNotes = (callback) => db.collection('notes').onSnapshot(callback);
 
 
-const editingNote = (noteEdit, id) => {
-  db.collection('notes').doc(id).update({
-    mensaje: noteEdit,
-  });
-};
+const editingNote = (notesObj, id) => db.collection('notes').doc(id).update(notesObj);
 
-const deleteNote = (id) => { db.collection('notes').doc(id).delete()};
+const deleteNote = (id) => db.collection('notes').doc(id).delete();
 
 
 
