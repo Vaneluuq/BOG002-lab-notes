@@ -1,5 +1,4 @@
 .notesMain {
-    /* margin: 1em 2em; */
     width: 20em;
     height: 18em;
     background: #8FA677;
@@ -8,7 +7,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 2em;
+    margin: 1em 1em;
 }
 
 .notesMain .opcionesNotes{

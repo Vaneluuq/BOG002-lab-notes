@@ -4,6 +4,36 @@
     height: 100vh;
     overflow: scroll;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: wrap; 
+}
+
+.showNotesContainer{
+    width: 18em;
+    height: 16em;
+    background: #8FA677;
+    margin: 1em 1em;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    border-radius: 5px;
+}
+
+.title {
+    margin: 0.5em;
+    font-size: 1.3em;
+}
+
+.editContainer{
+    position: absolute;
+    background-color: rgb(220, 233, 206);
+    bottom: 0;
+    width: 100%;
+    height: 15%;
+}
+
+.editContainer button {
+    margin: 0.5em;
+    width: 2em;
+    height: 2em;
 }
 

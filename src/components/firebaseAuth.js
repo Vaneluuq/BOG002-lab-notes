@@ -21,13 +21,14 @@ const createNotes =(notesObj)=> db.collection('notes').doc().set(notesObj);
 const getNotes = (callback) => db.collection('notes').onSnapshot(callback);
 
 
-const editingNote = (notesObj, id) => db.collection('notes').doc(id).update(notesObj);
+const editingNote = (id, notesObj) => db.collection('notes').doc(id).update(notesObj);
 
 const deleteNote = (id) => db.collection('notes').doc(id).delete();
 
+const getIdNote =(id) => db.collection("notes").doc(id).get()
 
 
 export { handleLogout, loginUser, loginWithGoogle, authListener, createUser,
-getNotes, createNotes, editingNote , deleteNote}
+getNotes, createNotes, editingNote , deleteNote, getIdNote}
 
 

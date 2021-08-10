@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react'
 import NotesCSS from '../CSS/MainNotes.module.css'
 import Notes from './Notes';
 import { createNotes, editingNote, getNotes,  deleteNote } from './firebaseAuth'
-
+import trash from '../assets/trashcan_trash_delete_recycle_bin_icon_176937.svg'
 import Modal from 'react-modal';
+import { useAlert } from 'react-alert'
 
 Modal.setAppElement('#root');
 
@@ -25,17 +26,21 @@ const customStyles = {
 const MainNotes = (props) => {
     const {
       modalIsOpen, 
-      setIsOpen, 
-      newNote, 
-      setNewNote
+      closeModal
     } = props
 
     const [notes, setNotes] = useState([])
-    const [existNote, setExistNote] = useState("")
 
- 
 
-    const addNotesCollection = (notesObj) => { createNotes(notesObj) }
+    const addNotesCollection = (notesObj) => {    createNotes(notesObj);
+       console.log("nueva nota agregada");
+      } 
+    
+    const editNotesCollection = (id, notesObj) => {
+       editingNote(id, notesObj);
+        console.log("editando nota ")
+    }
+    
 
 
     const getNotesToScreen = async () => {
@@ -52,52 +57,83 @@ const MainNotes = (props) => {
     }, []); 
 
 
-    const closeModal = () => {
-      setIsOpen(false);
-      setNewNote(false)
-    }
 
 
-    const deleteNote = async (id) => {
+    const deleteNotes = async (id) => {
       if (window.confirm("¿Se eleminará tu nota, quieres continuar?")) {
-          await deleteNote(id);
-          console.log("nota eliminada");
+        await deleteNote(id);
       }
   }
 
+  let time = new Date().toLocaleDateString("en-GB",{
+    hour: "2-digit",
+    minute: "2-digit"})
+  
+
+
     return (  
     <div className={NotesCSS.containerMainNotes}>
-      { newNote 
+      { modalIsOpen 
         ? ( <Modal
           isOpen={modalIsOpen}
           style={customStyles}
           onRequestClose={closeModal}>
           <Notes
+            btnIcon = "far fa-check-circle"
             addNotesCollection = {addNotesCollection}
-            closeModal= { closeModal}/>
+            closeModal= { closeModal}
+            time ={time}/>
         </Modal>
         ):(
           notes.map((note)=>( 
-          <div key={note.id}>
-            <Notes
-            title = {note.title}
-            body = {note.body}
-            // addNotesCollection = {addNotesCollection}
-            deleteNote = {deleteNote}
-            />
+          <div className={NotesCSS.showNotesContainer} key={note.id}>
+            <div className={NotesCSS.showNotes}>
+              <div>
+                <h2 className={NotesCSS.title}>{note.title}</h2>
+                <h3 className={NotesCSS.title}>{note.body}</h3>
+                 <div  className={NotesCSS.editContainer}>
+                    <button onClick={() => deleteNotes(note.id)}>
+                    <i class="fas fa-trash"></i></button>
+                    <p>{time}</p>
+                 </div>
+                  
+                  {/* <button onClick={() => modalIsOpen}>editar</button> */}
+              </div>
+             </div>
            </div>
-           )))
-      }
+          )))
+        }
     </div>
-    );
+  )
 }
+     
+
  
 export default MainNotes
 
 
+{/* <Notes
+btnIcon = "far fa-edit"
+title = {note.title}
+body = {note.body}
+deleteNote = {deleteNotes}
+closeModal= { closeModal}
+editNotesCollection = {editNotesCollection}
+/> */}
 
-  // const deleteNote =  () => {setNotes(notes.filter(note => deleteNote(note.id)))}
+// const addNotesCollection = async (notesObj) => {
+//   if(existNoteId === "") {
+//       await createNotes(notesObj);
+//         console.log("nueva nota agregada");
+//   } else {
+//       await editingNote(existNoteId, notesObj);
+//       console.log("editando nota ")
+//   }
+// }
 
+
+
+// </div>
  
 
 

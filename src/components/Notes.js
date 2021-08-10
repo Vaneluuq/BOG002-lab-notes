@@ -1,9 +1,9 @@
 import React from 'react'
 import NotesCSS from '../CSS/Notes.module.css'
-import trash from '../assets/trashcan_trash_delete_recycle_bin_icon_176937.svg'
 import Modal from 'react-modal';
 import { useState } from 'react';
-import uuid from 'react-uuid'
+import {getIdNote} from './firebaseAuth'
+
 
 Modal.setAppElement('#root');
 
@@ -13,29 +13,28 @@ const Notes = (props) => {
      closeModal, 
      title, 
      body, 
-     deleteNote, 
-     addOrEditNotes
+     btnIcon, 
+     time,
+     editNotesCollection
     } = props
 
-    const [datos, setDatos] = useState({ 
-          title: '',
-          body: '',
-        })   
+    const initialData = {
+        title: '',
+        body: '',
+    }
+
+    const [datos, setDatos] = useState(initialData)   
 
 
 //recibe el evento del formulario y envia a la coleccion la data
     const handleSubmit = e => {
         e.preventDefault();
-        addNotesCollection ({  ...datos, 
-        lastModified: time  })        
-        closeModal()
+            addNotesCollection({  ...datos, 
+                lastModified: time}
+                )        
+            closeModal()
       }
 
-
-// //funcion del tiempo para la verificacion de hora de creacion y modificacion de la nota 
-    let time = new Date().toLocaleDateString("en-GB",{
-        hour: "2-digit",
-        minute: "2-digit"})
 
  
   
@@ -47,6 +46,7 @@ const Notes = (props) => {
         })
     }
 
+    
   
     return ( 
         <form className ={NotesCSS.notesMain} onSubmit={handleSubmit}>
@@ -66,9 +66,8 @@ const Notes = (props) => {
                 />
 
             <div className={NotesCSS.opcionesNotes}>
-            <button type="submit"><i class="far fa-check-circle"></i> </button>
-            <img type="submit" onClick= {deleteNote} src={trash} alt="" />
-            <p>{time}</p>
+                <button type="submit"> <i className={btnIcon}></i> </button>
+                <p>{time}</p>
            </div>
      </form>
     );
@@ -77,110 +76,10 @@ const Notes = (props) => {
 export default Notes;
 
 
+{/* <i class="far fa-check-circle"></i> */}
 
 
-
-
-
-// const Notes = (props) => {
-//     const {
-//      title,
-//      body,
-//      onClickTrash,
-//      modalIsOpen, 
-//      setIsOpen, 
-//      addNotesToScreen,
-//      datos, 
-//      setDatos
-//     } = props
-
-
-// //funcion cerrar modal
-//     function closeModal() {
-//       setIsOpen(false);
-//     }
-
-
-// //recibe el evento del formulario y envia a la coleccion la data
-//     const handleSubmit = e => {
-//         e.preventDefault();
-//         addNotesToScreen({  ...datos, 
-//            lastModified: time
-//          })
-           
-//     //  closeModal()
-//  }
-  
-// // se aguardan en datos los eventos sobre los input para title y body
-//     const handleInputChange = (e) => {
-//         setDatos({
-//             ...datos,
-//             [e.target.name] : e.target.value
-//         })
-//     }
-
-// //funcion del tiempo para la verificacion de hora de creacion y modificacion de la nota 
-//     let time = new Date().toLocaleDateString("en-GB",{
-//         hour: "2-digit",
-//         minute: "2-digit"})
-
-
-//  // devuelve un evento al cerrar la ventana modal 
-//     const handleAfterCloseFunc = () => {
-
-//     }
-
-
-  
-//     return ( 
-//     // <Modal
-//     // isOpen={modalIsOpen}
-//     // style={customStyles}
-//     // onAfterClose={handleAfterCloseFunc}
-//     // onRequestClose={closeModal}
-//     // >
-//         <form className ={NotesCSS.notesMain} onSubmit={handleSubmit}>
-//             <input type="text" 
-//                 id="title" 
-//                 placeholder="Añade un titulo" 
-//                 autoFocus required 
-//                 name="title"
-//                 value={title}
-//                 onChange={handleInputChange}
-//                 />
-//             <textarea id="body" 
-//                 placeholder="Escribe tu nota aqui"
-//                 value={body}
-//                 name="body"
-//                 onChange={handleInputChange}
-//                 />
-
-//             <div className={NotesCSS.opcionesNotes}>
-//             <button type="submit"><i class="far fa-check-circle"></i> </button>
-//             <img type="submit" onClick={onClickTrash} src={trash} alt="" />
-//             <p>{time}</p>
-//            </div>
-//      </form>
-//     // </Modal>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+{/* <img type="button" onClick={deleteNote} src={trash} alt="" /> */}
 
 
 
