@@ -16,23 +16,28 @@ export function Welcome(){
            </div>
          </div>
           <div className={styles.welcomeButtons}>
-             <div className={styles.containerLogin}>
-                <img src={imgIngresar} alt="Imagen de fondo"/> 
-                <h2 className={styles.textLogin}>¡Sigue viajando con nosotros!</h2>
-                <Link to="/login">
-                   <h1 className={styles.titleLogin}>Ingresar</h1>
+            <div className={styles.containerButtons}>
+              <div className={styles.containerLogin}>
+                  <img src={imgIngresar} alt="Imagen de fondo"/> 
+                  <h2 className={styles.textLogin}>¡Sigue viajando con nosotros!</h2>
+                  <Link to="/login">
+                    <h1 className={styles.titleLogin}>Ingresar</h1>
+                  </Link>
+              </div> 
+              <div className = {styles.containerRegister}>
+                  <img src={imgRegistrarse} alt="Imagen de fondo"/> 
+                  <h2 className={styles.textRegister}>¡Empieza a viajar con nosotros!</h2>
+                  <Link to ="/signup">
+                    <h1 className={styles.titleRegister}>Registrarse</h1>
+                  </Link>
+              </div >
+              <div className = {styles.about}>
+                <Link to ="/about">
+                  <button>About NoteWithMe</button> 
                 </Link>
-             </div> 
-             <div className = {styles.containerRegister}>
-                <img src={imgRegistrarse} alt="Imagen de fondo"/> 
-                <h2 className={styles.textRegister}>¡Empieza a viajar con nosotros!</h2>
-                <Link to ="/signup">
-                  <h1 className={styles.titleRegister}>Registrarse</h1>
-                </Link>
-             </div>
-              <Link to ="/about">
-                <button className={styles.about}>About NoteWithMe</button> 
-              </Link> 
+                </div>
+            </div>
+            
           </div> 
         </div>
     )

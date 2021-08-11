@@ -27,26 +27,28 @@ const customStyles = {
 const MainNotes = (props) => {
     const {
       modalIsOpen, 
-      closeModal
+      closeModal, 
+      openModal 
     } = props
 
     const [notes, setNotes] = useState([])
     const [existId, setExistId] = useState("")
 
+    
 
-    const addNotesCollection = async (notesObj) => {    
+
+    const addNotesCollection = async (notesObj) => { 
+      if(existId ===""){   
         await createNotes(notesObj);
          toast("nueva nota agregada", {
            type:"success", 
            autoClose: 2000
-         });
+        })}else{
+          console.log(notesObj)
+          await editingNote(existId, notesObj)
+          setExistId("")
+        }
       } 
-    
-    const editNotesCollection = (id, notesObj) => {
-       editingNote(id, notesObj);
-        console.log("editando nota ")
-    }
-  
 
     const getNotesToScreen = async () => {
           getNotes((querySnapshot) => {
@@ -90,6 +92,7 @@ const MainNotes = (props) => {
           <Notes
             addNotesCollection = {addNotesCollection}
             closeModal= { closeModal}
+            existId ={existId}
            />
         </Modal>
         ):(
@@ -100,16 +103,14 @@ const MainNotes = (props) => {
                 <h2 className={NotesCSS.title}>{note.title}</h2>
                 <h3 className={NotesCSS.body}>{note.body}</h3>
                  <div  className={NotesCSS.editContainer}>
-                    <button onClick={() => setExistId(note.id)}>
+                    <button onClick={() =>openModal(setExistId(note.id))}>
                       <i class= "far fa-edit"></i></button>
                     <button onClick={() => deleteNotes(note.id)}>
                       <i class="fas fa-trash"></i></button>
                     <button onClick={() => deleteNotes(note.id)}>
-                     <i class="fas fa-address-book"></i></button>
-                      <p>{note.lastModified}
-                            </p>
+                      <i class="fas fa-address-book"></i></button>
+                    <p>{note.lastModified}</p>
                  </div>
-                  {/* <button onClick={() => modalIsOpen}>editar</button>  */}
               </div>
              </div>
            </div>

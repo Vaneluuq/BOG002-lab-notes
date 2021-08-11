@@ -1,9 +1,9 @@
 import React from 'react'
 import NotesCSS from '../CSS/Notes.module.css'
 import Modal from 'react-modal';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {getIdNote} from './firebaseAuth'
-import { db } from '../firebase';
+
 
 
 Modal.setAppElement('#root');
@@ -14,7 +14,7 @@ const Notes = (props) => {
      closeModal, 
      title, 
      body, 
-     editNotesCollection
+     existId
     } = props
 
     const initialData = {
@@ -28,14 +28,11 @@ const Notes = (props) => {
 //recibe el evento del formulario y envia a la coleccion la data
     const handleSubmit = e => {
         e.preventDefault();
-            addNotesCollection({  ...datos, 
-                lastModified: time 
-            })        
-            closeModal()
+          addNotesCollection({  ...datos, lastModified: time }) 
+          setDatos({...initialData});    
+          closeModal();
       }
 
-  
- 
   
 // se aguardan en datos los eventos sobre los input para title y body
     const handleInputChange = (e) => {
@@ -51,8 +48,23 @@ const Notes = (props) => {
     minute: "2-digit"})
   
 
+
+    const getNoteById  = async (id) => {
+        const doc = await getIdNote(id);
+            setDatos({...doc.data()})
+    }
+
+    useEffect(() =>{
+        if (existId === "") {
+            setDatos({...initialData });
+        } else {
+            getNoteById(existId);
+        }
+
+    },[existId]);
     
   
+
     return ( 
         <form className ={NotesCSS.notesMain} onSubmit={handleSubmit}>
             <input type="text" 
@@ -60,18 +72,20 @@ const Notes = (props) => {
                 placeholder="Añade un titulo" 
                 autoFocus required 
                 name="title"
-                value={title}
+                value={existId === "" ? title : datos.title}
                 onChange={handleInputChange}
                 />
             <textarea id="body" 
                 placeholder="Escribe tu nota aqui"
-                 value={body}
+                 value={existId === "" ? body : datos.body}
                 name="body"
                 onChange={handleInputChange}
                 />
-
             <div className={NotesCSS.opcionesNotes}>
-                <button type="submit"> <i className="far fa-check-circle"></i> </button>
+              <button className="btn-guardar">
+                {existId === "" ? "Guardar" : "Actualizar"}
+              </button>
+                {/* <button type="submit"> <i className="far fa-check-circle"></i> </button> */}
                 <p>{time}</p>
            </div>
      </form>

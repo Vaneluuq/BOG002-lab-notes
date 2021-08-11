@@ -3,7 +3,6 @@ import SideBarCSS from '../CSS/Sidebar.module.css'
 
 const Sidebar = (props) => {
     const {
-      addNote, 
       openModal
     } = props
     
@@ -15,7 +14,7 @@ const Sidebar = (props) => {
             <div className={SideBarCSS.createNote}>
                <h3>Nueva nota</h3>
                {/* <button onClick={addNote}> + </button> */}
-               <button onClick={openModal}> + </button>
+               <button onClick={ openModal}> + </button>
             </div>
             <div className={SideBarCSS.albumes}>
              <div className={SideBarCSS.titleAlbumes}>

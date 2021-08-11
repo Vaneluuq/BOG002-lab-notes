@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Sedgwick+Ave+Display&display=swap');
 
+/********************* tablet horizantal  *************************************/
+@media only screen and (min-width:  768px) and (max-width: 1024px){
 * {
     margin:0;
     padding:0;
@@ -7,15 +9,19 @@
 }
 
 .welcome {
-    display: flex;
+    display: grid;
     height:100vh;
     width: 100%;
     background-color: #8FA677;
+    grid-template-columns: 55% 5% 35% 5% ;
+    grid-template-rows: 100% ;
 }
 
 .welcomeImage{
     height:100vh;
-    width: 70%;
+    width: 100%;
+    grid-column-start: 1;
+    grid-column-end: 2;
     position: relative;
     background-image: url('../assets/fondo-principal.jpg');
     background-size: cover;
@@ -39,83 +45,235 @@
 }
 
 .welcomeButtons{
-    display: flex;
     height:100vh;
-    width: 30%;
-    flex-direction: column;
+    width: 100%;
+    grid-column-start: 3;
+    grid-column-end: 4;
 }
 
- .welcomeButtons img {
-    width: 12em;
-    height: 11em;
-    margin: 1em;
-    margin-left: auto;
-    margin-right: auto;
+.welcomeButtons img {
+    width: 100%;
+    height: 100%;
     border: 5px solid #B4BD7E;
     mix-blend-mode: multiply;
-} 
+}  
+
+
+.containerButtons{
+    display: grid;
+    height:100vh;
+    width: 100%;
+    grid-template-columns: 100% ;
+    grid-template-rows: 10% 30% 5% 30% 5% 10% 10%  ;
+    color: white;
+    text-decoration: none;
+}
+
+.containerButtons a{
+    color: rgb(235, 255, 195);
+}
 
 .containerLogin,
 .containerRegister {
-    width: 12em;
-    height: 11em;
-    margin: 1em;
-    margin-left: auto;
-    margin-right: auto;
     position: relative;
-    display: inline-block;
+    width: 100%;
+    height: 100%;
     text-align: center;
-    margin-top: 2em;
 }
 
-.welcomeButtons h1, h2 {
-    color: white;
+.containerLogin{
+    grid-row-start: 2;
+    grid-row-end:3 ;
 }
 
-.textLogin {
+.containerRegister{
+    grid-row-start: 4;
+    grid-row-end:5 ;
+}
+
+ .textLogin,
+ .textRegister {
     position: absolute;
-    top: 1em;
-    font-size: 1.5em;
-    padding: 0.5em 1em;
+    top: 1vh;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    padding: 0em 0.5em;
+    font-size: 3.5vh;
  }
 
- .titleLogin {
-    position: absolute;
-    top: 4.5em;
-    left: 1.1em;
-    cursor: pointer;
- }
-
- .textRegister{
-    position: absolute;
-    top: 1em;
-    font-size: 1.5em;
-    padding: 0.5em 0.5em;
- }
-
+ .titleLogin,
  .titleRegister {
     position: absolute;
-    top: 4.5em;
-    left: 0.6em;
-    cursor: pointer;
+    top: 20vh;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    font-size: 4vh;
  }
 
+
+
 .about {
-    width: 10em;
-    height: 3.5em; 
-    margin: 2em 4.3em;
+    width: 100%;
+    height: 100%; 
+    grid-row-start: 6;
+    grid-row-end:7;
+}
+
+.about button {
+    width: 100%;
+    height: 100%; 
+    cursor: pointer;
     background: #B4BD7E;
     border: none;
-    cursor: pointer;
-    font-size: 1.2em;
+    font-size: 2em;
+    padding: 0.5em 0.5em;
+}
 }
 
 
+/********************* tablet vertical  *************************************/
 
 
+@media only screen and (min-width:  480px) and (max-width: 767px){
+    * {
+        margin:0;
+        padding:0;
+        box-sizing: border-box;
+    }
+    
+    .welcome {
+        display: grid;
+        height:100vh;
+        width: 100%;
+        background-color: #8FA677;
+        grid-template-columns: 100% ;
+        grid-template-rows: 60% 5% 30% 5%;
+    }
+    
+    .welcomeImage{
+        height:100%;
+        width: 100%;
+        grid-row-start:1 ;
+        grid-row-end:2 ;
+        position: relative;
+        background-image: url('../assets/fondo-principal.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-color: #8FA677;
+    }
+    
+    .title {
+        position: absolute;
+        max-height: 14vh;
+        width: 100%;
+        background: #8FA677A1;
+        border: #8FA677 solid ;
+        top: 70%;
+        text-align: center;
+        font-family: 'Sedgwick Ave Display', cursive;
+    }
+    
+    .title h1 {
+        font-size: 6vw;
+    }
+    
+    .welcomeButtons{
+        height:100%;
+        width: 100%; 
+        grid-row-start: 3;
+        grid-row-end: 4;
+    }
+
+    .welcomeButtons img {
+        width: 100%;
+        height: 100%;
+        border: 5px solid #B4BD7E;
+        mix-blend-mode: multiply;
+    }
 
 
+    .containerButtons{
+        display: grid;
+        height:100%;
+        width: 100%;
+        grid-template-columns: 5% 20% 20% 10% 20% 20% 5%  ; ;
+        grid-template-rows: 75% 5% 20%;
+        color: white;
+        text-decoration: none;
+    }
 
+    .containerLogin{
+        grid-column-start: 2;
+        grid-column-end:4;
+    }
+    
+    .containerRegister{
+        grid-column-start: 5;
+        grid-column-end:7;
+    }
+
+    .containerLogin,
+    .containerRegister {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+    }
+
+    .containerButtons a{
+        color: rgb(235, 255, 195);
+    }
+
+    .textLogin,
+     .textRegister {
+        position: absolute;
+        top: 1vh;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        padding: 0em 0.5em;
+        font-size: 3vh;
+     }
+
+     .titleLogin,
+     .titleRegister {
+        position: absolute;
+        top: 15vh;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        font-size: 4vh;
+     }
+    
+    .about {
+        width: 70%;
+        height: 100%; 
+        grid-row-start: 3;
+        grid-row-end: 4;
+        grid-column-start: 3;
+        grid-column-end:6;
+        justify-self: center;
+    }
+    
+    .about button {
+        width: 100%;
+        height: 100%; 
+        cursor: pointer;
+        background: #B4BD7E;
+        border: none;
+        font-size: 3vw;
+        padding: 0.5em 0.5em;
+    }
+
+
+    }
+    
 
 
 

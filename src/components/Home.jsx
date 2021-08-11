@@ -2,7 +2,6 @@ import React from 'react'
 import Sidebar from './Sidebar'
 import MainNotes from './MainNotes'
 import HomeCSS from '../CSS/Home.module.css'
-import { useState } from 'react'
 import { handleLogout} from './firebaseAuth'
 import { Link } from 'react-router-dom';
 
@@ -34,6 +33,7 @@ export default function Home() {
               modalIsOpen = {modalIsOpen}
               setIsOpen = {setIsOpen}
               closeModal= { closeModal}
+              openModal = {openModal}
               />
           </div>       
    </div>
