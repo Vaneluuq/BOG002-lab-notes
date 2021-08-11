@@ -18,7 +18,7 @@ const authListener = (callback) => fb.auth().onAuthStateChanged(callback)
 
 const createNotes =(notesObj)=> db.collection('notes').doc().set(notesObj);
 
-const getNotes = (callback) => db.collection('notes').onSnapshot(callback);
+const getNotes = (callback) => db.collection('notes').orderBy('lastModified', 'desc').onSnapshot(callback);
 
 
 const editingNote = (id, notesObj) => db.collection('notes').doc(id).update(notesObj);

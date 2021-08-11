@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react'
 import NotesCSS from '../CSS/MainNotes.module.css'
 import Notes from './Notes';
 import { createNotes, editingNote, getNotes,  deleteNote } from './firebaseAuth'
-import trash from '../assets/trashcan_trash_delete_recycle_bin_icon_176937.svg'
+import swal from 'sweetalert'
 import Modal from 'react-modal';
-import { useAlert } from 'react-alert'
+import { toast } from 'react-toastify';
+
 
 Modal.setAppElement('#root');
 
@@ -30,18 +31,22 @@ const MainNotes = (props) => {
     } = props
 
     const [notes, setNotes] = useState([])
+    const [existId, setExistId] = useState("")
 
 
-    const addNotesCollection = (notesObj) => {    createNotes(notesObj);
-       console.log("nueva nota agregada");
+    const addNotesCollection = async (notesObj) => {    
+        await createNotes(notesObj);
+         toast("nueva nota agregada", {
+           type:"success", 
+           autoClose: 2000
+         });
       } 
     
     const editNotesCollection = (id, notesObj) => {
        editingNote(id, notesObj);
         console.log("editando nota ")
     }
-    
-
+  
 
     const getNotesToScreen = async () => {
           getNotes((querySnapshot) => {
@@ -57,19 +62,23 @@ const MainNotes = (props) => {
     }, []); 
 
 
-
-
-    const deleteNotes = async (id) => {
-      if (window.confirm("¿Se eleminará tu nota, quieres continuar?")) {
-        await deleteNote(id);
-      }
-  }
-
-  let time = new Date().toLocaleDateString("en-GB",{
-    hour: "2-digit",
-    minute: "2-digit"})
+    const deleteNotes = (id) => {
+      swal({
+        title: "Se eliminará tu nota",
+        text: "Quieres continuar?",
+        icon: "warning",
+        buttons: ["No", "Si"]
+        }).then(respuesta => {
+        if(respuesta){
+          deleteNote(id);
+          toast("Nota borrada", {
+            type:"success", 
+            autoClose: 2000
+          });
+        }
+      })
+    }
   
-
 
     return (  
     <div className={NotesCSS.containerMainNotes}>
@@ -79,10 +88,9 @@ const MainNotes = (props) => {
           style={customStyles}
           onRequestClose={closeModal}>
           <Notes
-            btnIcon = "far fa-check-circle"
             addNotesCollection = {addNotesCollection}
             closeModal= { closeModal}
-            time ={time}/>
+           />
         </Modal>
         ):(
           notes.map((note)=>( 
@@ -90,14 +98,18 @@ const MainNotes = (props) => {
             <div className={NotesCSS.showNotes}>
               <div>
                 <h2 className={NotesCSS.title}>{note.title}</h2>
-                <h3 className={NotesCSS.title}>{note.body}</h3>
+                <h3 className={NotesCSS.body}>{note.body}</h3>
                  <div  className={NotesCSS.editContainer}>
+                    <button onClick={() => setExistId(note.id)}>
+                      <i class= "far fa-edit"></i></button>
                     <button onClick={() => deleteNotes(note.id)}>
-                    <i class="fas fa-trash"></i></button>
-                    <p>{time}</p>
+                      <i class="fas fa-trash"></i></button>
+                    <button onClick={() => deleteNotes(note.id)}>
+                     <i class="fas fa-address-book"></i></button>
+                      <p>{note.lastModified}
+                            </p>
                  </div>
-                  
-                  {/* <button onClick={() => modalIsOpen}>editar</button> */}
+                  {/* <button onClick={() => modalIsOpen}>editar</button>  */}
               </div>
              </div>
            </div>
@@ -111,30 +123,6 @@ const MainNotes = (props) => {
  
 export default MainNotes
 
-
-{/* <Notes
-btnIcon = "far fa-edit"
-title = {note.title}
-body = {note.body}
-deleteNote = {deleteNotes}
-closeModal= { closeModal}
-editNotesCollection = {editNotesCollection}
-/> */}
-
-// const addNotesCollection = async (notesObj) => {
-//   if(existNoteId === "") {
-//       await createNotes(notesObj);
-//         console.log("nueva nota agregada");
-//   } else {
-//       await editingNote(existNoteId, notesObj);
-//       console.log("editando nota ")
-//   }
-// }
-
-
-
-// </div>
- 
 
 
 

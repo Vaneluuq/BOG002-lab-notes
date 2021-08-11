@@ -5,6 +5,8 @@ import Home from './components/Home.jsx'
 import Login from './components/Login.jsx'
 import About from './components/About';
 import Register from './components/Register';
+import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 import {
@@ -37,6 +39,7 @@ function App() {
       </Switch> 
       </div>
     </Router>
+    <ToastContainer></ToastContainer>
     </Fragment>
   );
 }

@@ -3,6 +3,7 @@ import NotesCSS from '../CSS/Notes.module.css'
 import Modal from 'react-modal';
 import { useState } from 'react';
 import {getIdNote} from './firebaseAuth'
+import { db } from '../firebase';
 
 
 Modal.setAppElement('#root');
@@ -13,8 +14,6 @@ const Notes = (props) => {
      closeModal, 
      title, 
      body, 
-     btnIcon, 
-     time,
      editNotesCollection
     } = props
 
@@ -30,12 +29,12 @@ const Notes = (props) => {
     const handleSubmit = e => {
         e.preventDefault();
             addNotesCollection({  ...datos, 
-                lastModified: time}
-                )        
+                lastModified: time 
+            })        
             closeModal()
       }
 
-
+  
  
   
 // se aguardan en datos los eventos sobre los input para title y body
@@ -45,6 +44,12 @@ const Notes = (props) => {
             [e.target.name] : e.target.value
         })
     }
+
+    
+  const time = new Date().toLocaleDateString("en-GB",{
+    hour: "2-digit",
+    minute: "2-digit"})
+  
 
     
   
@@ -66,7 +71,7 @@ const Notes = (props) => {
                 />
 
             <div className={NotesCSS.opcionesNotes}>
-                <button type="submit"> <i className={btnIcon}></i> </button>
+                <button type="submit"> <i className="far fa-check-circle"></i> </button>
                 <p>{time}</p>
            </div>
      </form>
@@ -75,17 +80,6 @@ const Notes = (props) => {
 
 export default Notes;
 
-
-{/* <i class="far fa-check-circle"></i> */}
-
-
-{/* <img type="button" onClick={deleteNote} src={trash} alt="" /> */}
-
-
-
-       {/* {datos === "" 
-                ? (<button type="submit"><i class="far fa-check-circle"></i></button>)
-                :(<button type="submit"><i class="far fa-edit"></i></button> )} */}
 
 
 

@@ -16,11 +16,20 @@
     cursor: pointer;
     position: relative;
     border-radius: 5px;
+    box-shadow: 5px 5px 5px 1px rgba(0, 0, 0, 0.2)
 }
 
 .title {
     margin: 0.5em;
     font-size: 1.3em;
+    padding: 0.5em;
+    border-bottom:solid 1px rgb(220, 233, 206);
+    color: rgb(220, 233, 206);
+}
+
+.body {
+    color: rgb(220, 233, 206);
+    font-size: 1em;
 }
 
 .editContainer{
@@ -29,11 +38,31 @@
     bottom: 0;
     width: 100%;
     height: 15%;
+    display: grid;
+    grid-column: 20% 20% 20% 40%;
+    grid-row: 100%;
+}
+
+.editContainer p{
+    grid-column-start: 4;
+    font-size: 1em;
+    justify-self: center;
+    align-self: center;
 }
 
 .editContainer button {
     margin: 0.5em;
     width: 2em;
     height: 2em;
+    justify-self: center;
+    border: #8FA677 solid 1px;
+}
+
+.editContainer button:first-child {
+    grid-column-start: 1;
+}
+
+.editContainer button:nth-child(2) {
+    grid-column-start: 2;
 }
 
