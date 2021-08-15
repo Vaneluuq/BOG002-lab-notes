@@ -10,10 +10,13 @@ import { Link } from 'react-router-dom';
 export default function Home() {
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
+
+ // Se abre modal que crea o edita nota
   function openModal() {
      setIsOpen(true);
   }
 
+  // Se cierra modal que crea o edita nota
   const closeModal = () => {
     setIsOpen(false);
   }

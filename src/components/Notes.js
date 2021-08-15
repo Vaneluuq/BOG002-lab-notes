@@ -25,7 +25,7 @@ const Notes = (props) => {
     const [datos, setDatos] = useState(initialData)   
 
 
-//recibe el evento del formulario y envia a la coleccion la data
+//recibe el evento del formulario y lo envia a la coleccion en firestore
     const handleSubmit = e => {
         e.preventDefault();
           addNotesCollection({  ...datos, lastModified: time }) 
@@ -34,7 +34,7 @@ const Notes = (props) => {
       }
 
   
-// se aguardan en datos los eventos sobre los input para title y body
+// se guardan en "datos" los eventos sobre los input para title y body
     const handleInputChange = (e) => {
         setDatos({
             ...datos,
@@ -42,7 +42,7 @@ const Notes = (props) => {
         })
     }
 
-    
+//funcion generadora de la fecha de creacion y modificacion 
 const time = new Date().toLocaleDateString('en-GB',{
      day: 'numeric',
      month: 'long',
@@ -52,7 +52,7 @@ const time = new Date().toLocaleDateString('en-GB',{
     })
   
 
-
+// se obtiene id de la nota que permiti identificar la data cuando se crea o modifica la nota. 
     const getNoteById  = async (id) => {
         const doc = await getIdNote(id);
             setDatos({...doc.data()})

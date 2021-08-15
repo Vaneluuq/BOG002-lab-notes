@@ -13,17 +13,20 @@ const Login = () => {
     const [passwordError, setPasswordError] = useState("")
 
 
+    //Se limpia data contenida en inputs
     const clearInput= () => {
         setEmail('');
         setPassword('');
     }
 
+    // Se borran errores mostrados en pantalla
     const clearErrors = () => {
         setEmailError('');
         setPasswordError('');
     }
 
 
+    // funcion ingresar con errores generados por email incorrecto, no encontrado.... 
     const handleLogin = () => {
     clearErrors()
 
@@ -42,6 +45,7 @@ const Login = () => {
     })
 }
 
+//ingreso con google 
     const handleGoogle = () => {
         loginWithGoogle().then(res => {
                 setUser(res.user)

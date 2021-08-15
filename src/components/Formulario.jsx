@@ -17,10 +17,9 @@ const Formulario = (props) => {
     image
 } = props
 
+// Se escuchan los cambios ocurridos en inputs
  const emailChange = (e) => setEmail(e.target.value);
-
  const passwordChange = (e) => setPassword(e.target.value);
-
  const enviarDatos = (e) => e.preventDefault();
 
     return (

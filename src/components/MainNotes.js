@@ -36,7 +36,8 @@ const MainNotes = (props) => {
     const [searchNote, setSearchNote] = useState("");
     const [optionSearchNote, setOptionSearchNote] = useState("titleOption");
 
-    
+  
+    //se crea o edita nota 
     const addNotesCollection = async (notesObj) => { 
       if(existId ===""){   
         await createNotes(notesObj);
@@ -49,7 +50,7 @@ const MainNotes = (props) => {
         }
       }
     
-  
+    // se filtran notas por titulo, cuerpo o fecha de la nota 
     const filterNote = async(objNote, searchNote) => {
       if(optionSearchNote ==="titleOption"){
         const notaFiltradaByTitle = await objNote.filter(nota => nota.title.toLowerCase().includes(searchNote.toLowerCase()))
@@ -63,11 +64,12 @@ const MainNotes = (props) => {
       }
     };
     
-    
+    // Se escuchan los cambios ocurridos en el input de busqueda y select con opciones de busqueda 
     const inputChange = (e) => setSearchNote(e.target.value);
     const selectChange =(e) => setOptionSearchNote(e.target.value)
     
-
+    
+    // Se muestran las notas existentes en firestore 
     const getNotesToScreen = async () => {
           getNotes((querySnapshot) => {
               const myNotes = [];
@@ -86,7 +88,7 @@ const MainNotes = (props) => {
     }, []); 
 
     
-
+   // Se eliminan las notas 
     const deleteNotes = (id) => {
       swal({
         title: "Se eliminará tu nota",
