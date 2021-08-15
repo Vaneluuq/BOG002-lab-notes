@@ -1,17 +1,55 @@
-.containerMainNotes{
+.containerMain{
     background: #B4BD7E;
     width: 100%;
     height: 100vh;
     overflow: scroll;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 10% 90%;
+
+}
+
+.search{
+    grid-row-start:1;
+    grid-row-end: 2;
+    margin-top: 1em; 
+    text-align: center;
+}
+
+.search input {
+    background-color: #77a68488;
+    width: 50%;
+    height: 50%;
+    border: none;
+    font-size: 1em;
+    text-align: center;
+}
+
+.search button {
+    background-color: #77a68488;
+    justify-self: center;
+    height: 51%;
+    width: 5%;
+    border-left: 0.1em rgb(178, 202, 158) solid;
+    border-bottom: none;
+    border-top: none;
+    border-right: none;
+    cursor: pointer;
+}
+
+
+.containerMainNotes{
+    grid-row-start:2;
+    grid-row-end: 3;
     display: flex;
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
 }
 
 .showNotesContainer{
     width: 18em;
     height: 16em;
     background: #8FA677;
-    margin: 1em 1em;
+    margin: 2em 1em;
     text-align: center;
     cursor: pointer;
     position: relative;

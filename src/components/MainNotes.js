@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Fragment } from 'react'
 import NotesCSS from '../CSS/MainNotes.module.css'
 import Notes from './Notes';
 import { createNotes, editingNote, getNotes,  deleteNote } from './firebaseAuth'
@@ -28,15 +28,15 @@ const MainNotes = (props) => {
     const {
       modalIsOpen, 
       closeModal, 
-      openModal 
+      openModal
     } = props
 
-    const [notes, setNotes] = useState([])
-    const [existId, setExistId] = useState("")
+    const [notes, setNotes] = useState([]);
+    const [existId, setExistId] = useState("");
+    const [searchNote, setSearchNote] = useState("");
+
 
     
-
-
     const addNotesCollection = async (notesObj) => { 
       if(existId ===""){   
         await createNotes(notesObj);
@@ -44,11 +44,19 @@ const MainNotes = (props) => {
            type:"success", 
            autoClose: 2000
         })}else{
-          console.log(notesObj)
           await editingNote(existId, notesObj)
           setExistId("")
         }
-      } 
+      }
+    
+  
+    const filterNote = async(objNote, searchNote) => {
+      const notasFiltradas = await objNote.filter(nota => nota.title.toLowerCase().includes(searchNote.toLowerCase()))
+      setNotes(notasFiltradas)
+    };
+    
+    const inputChange = (e) => setSearchNote(e.target.value);
+    
 
     const getNotesToScreen = async () => {
           getNotes((querySnapshot) => {
@@ -56,13 +64,18 @@ const MainNotes = (props) => {
               querySnapshot.forEach(doc => {
                 myNotes.push({...doc.data(), id:doc.id});
               });
+            if(searchNote ===""){
               setNotes(myNotes);
+            }else{
+              filterNote(myNotes, searchNote)
+            }
           });      
       };
       useEffect(() => {
-        getNotesToScreen()
+        getNotesToScreen() 
     }, []); 
 
+    
 
     const deleteNotes = (id) => {
       swal({
@@ -80,10 +93,17 @@ const MainNotes = (props) => {
         }
       })
     }
-  
+
+
 
     return (  
-    <div className={NotesCSS.containerMainNotes}>
+    <div className={NotesCSS.containerMain}>
+      <div className={NotesCSS.search}>
+        <input type="text" placeholder="Buscar mi nota"  
+            value={searchNote} onChange={inputChange} onKeyUp={getNotesToScreen}/>    
+        <button type="button"><i class="fas fa-search"></i></button>
+      </div>
+     <div className={NotesCSS.containerMainNotes}>
       { modalIsOpen 
         ? ( <Modal
           isOpen={modalIsOpen}
@@ -97,12 +117,13 @@ const MainNotes = (props) => {
         </Modal>
         ):(
           notes.map((note)=>( 
+          <>
           <div className={NotesCSS.showNotesContainer} key={note.id}>
             <div className={NotesCSS.showNotes}>
               <div>
                 <h2 className={NotesCSS.title}>{note.title}</h2>
                 <h3 className={NotesCSS.body}>{note.body}</h3>
-                 <div  className={NotesCSS.editContainer}>
+                <div  className={NotesCSS.editContainer}>
                     <button onClick={() =>openModal(setExistId(note.id))}>
                       <i class= "far fa-edit"></i></button>
                     <button onClick={() => deleteNotes(note.id)}>
@@ -110,12 +131,15 @@ const MainNotes = (props) => {
                     <button onClick={() => deleteNotes(note.id)}>
                       <i class="fas fa-address-book"></i></button>
                     <p>{note.lastModified}</p>
-                 </div>
+                </div>
               </div>
-             </div>
-           </div>
-          )))
+            </div>
+          </div>
+          </>
+          ))
+        )
         }
+    </div>
     </div>
   )
 }
@@ -123,7 +147,6 @@ const MainNotes = (props) => {
 
  
 export default MainNotes
-
 
 
 

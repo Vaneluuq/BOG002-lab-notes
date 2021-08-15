@@ -5,7 +5,6 @@ import { useState, useEffect } from 'react';
 import {loginUser, loginWithGoogle, authListener } from './firebaseAuth';
 import { Redirect } from 'react-router-dom';
 
-
 const Login = () => {
     const [user, setUser] = useState("");
     const [email, setEmail] = useState("");
