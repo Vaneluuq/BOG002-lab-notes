@@ -34,7 +34,7 @@ const MainNotes = (props) => {
     const [notes, setNotes] = useState([]);
     const [existId, setExistId] = useState("");
     const [searchNote, setSearchNote] = useState("");
-
+    const [optionSearchNote, setOptionSearchNote] = useState("titleOption");
 
     
     const addNotesCollection = async (notesObj) => { 
@@ -51,11 +51,21 @@ const MainNotes = (props) => {
     
   
     const filterNote = async(objNote, searchNote) => {
-      const notasFiltradas = await objNote.filter(nota => nota.title.toLowerCase().includes(searchNote.toLowerCase()))
-      setNotes(notasFiltradas)
+      if(optionSearchNote ==="titleOption"){
+        const notaFiltradaByTitle = await objNote.filter(nota => nota.title.toLowerCase().includes(searchNote.toLowerCase()))
+        setNotes(notaFiltradaByTitle)
+      } else if(optionSearchNote ==="bodyOption"){
+        const notaFiltradaByBody = await objNote.filter(nota => nota.body.toLowerCase().includes(searchNote.toLowerCase()))
+        setNotes(notaFiltradaByBody)
+      }else{
+        const notaFiltradaByDate = await objNote.filter(nota => nota.lastModified.toLowerCase().includes(searchNote.toLowerCase()))
+        setNotes(notaFiltradaByDate)
+      }
     };
     
+    
     const inputChange = (e) => setSearchNote(e.target.value);
+    const selectChange =(e) => setOptionSearchNote(e.target.value)
     
 
     const getNotesToScreen = async () => {
@@ -99,6 +109,11 @@ const MainNotes = (props) => {
     return (  
     <div className={NotesCSS.containerMain}>
       <div className={NotesCSS.search}>
+        <select id="optionSearch" name="options" value={optionSearchNote} onChange={selectChange}>
+          <option value="titleOption">Titulo de la nota</option>
+          <option value="bodyOption">Cuerpo de la nota</option>
+          <option value="timeOption">Fecha de la nota</option>
+        </select>
         <input type="text" placeholder="Buscar mi nota"  
             value={searchNote} onChange={inputChange} onKeyUp={getNotesToScreen}/>    
         <button type="button"><i class="fas fa-search"></i></button>

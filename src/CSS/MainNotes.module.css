@@ -18,11 +18,21 @@
 
 .search input {
     background-color: #77a68488;
-    width: 50%;
+    width: 35%;
     height: 50%;
     border: none;
     font-size: 1em;
     text-align: center;
+}
+
+.search select {
+    background-color: #77a68488;
+    width: 10%;
+    height: 51%;
+    border: none;
+    font-size: 0.8em;
+    border-right: 0.1em rgb(178, 202, 158) solid;
+    cursor: pointer;
 }
 
 .search button {
@@ -34,7 +44,6 @@
     border-bottom: none;
     border-top: none;
     border-right: none;
-    cursor: pointer;
 }
 
 

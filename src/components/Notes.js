@@ -43,9 +43,13 @@ const Notes = (props) => {
     }
 
     
-  const time = new Date().toLocaleDateString("en-GB",{
-    hour: "2-digit",
-    minute: "2-digit"})
+const time = new Date().toLocaleDateString('en-GB',{
+     day: 'numeric',
+     month: 'long',
+     year: 'numeric', 
+     hour: "2-digit",
+     minute: "2-digit"
+    })
   
 
 
