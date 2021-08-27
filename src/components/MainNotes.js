@@ -51,8 +51,9 @@ const MainNotes = (props) => {
       }
     
     // se filtran notas por titulo, cuerpo o fecha de la nota 
-    const filterNote = async(objNote, searchNote) => {
-      if(optionSearchNote ==="titleOption"){
+
+    const filterNote = async(objNote, searchNote, option) => {
+      if(optionSearchNote === option){
         const notaFiltradaByTitle = await objNote.filter(nota => nota.title.toLowerCase().includes(searchNote.toLowerCase()))
         setNotes(notaFiltradaByTitle)
       } else if(optionSearchNote ==="bodyOption"){
@@ -79,7 +80,7 @@ const MainNotes = (props) => {
             if(searchNote ===""){
               setNotes(myNotes);
             }else{
-              filterNote(myNotes, searchNote)
+              filterNote(myNotes, searchNote, optionSearchNote)
             }
           });      
       };

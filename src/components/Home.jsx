@@ -37,7 +37,7 @@ export default function Home() {
               setIsOpen = {setIsOpen}
               closeModal= { closeModal}
               openModal = {openModal}
-              />
+            />
           </div>       
    </div>
   )
