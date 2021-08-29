@@ -4,7 +4,7 @@ import img from "../assets/login.jpg"
 import { useState , useEffect} from 'react';
 import { createUser , loginWithGoogle, authListener } from './firebaseAuth';
 import { Redirect } from 'react-router-dom';
-
+import { fb } from '../firebase';
 
 
 const Register = () => {
@@ -13,8 +13,8 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("")
-  const [displayName, setDisplayName] = useState(null)
- 
+  const [displayName, setDisplayName] = useState("")
+
 
   const clearInput= () => {
         setEmail('');
@@ -30,7 +30,18 @@ const Register = () => {
   const handleSignup = () => {
         clearErrors();
       createUser(email, password)
-        .catch(err => {
+      .then(() => {
+        let user = fb.auth().currentUser;
+        user.updateProfile({
+            displayName: displayName})
+            .then(() => {
+            console.log("registrado")
+            setDisplayName("")
+        }, function(error) {
+            console.log(error)
+        });        
+      }) 
+     .catch(err => {
         switch (err.code) {
             case "auth/email-already-in-use":
             case "auth/invalid-email":
@@ -40,8 +51,11 @@ const Register = () => {
               setPasswordError(err.message)
               break;
         }
-    })
-}
+      })
+    }
+
+  
+
 
 const handleGoogle = () => {
   loginWithGoogle()
@@ -68,12 +82,10 @@ const handleGoogle = () => {
       // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-
-
   return(
     <div>
     { user ? 
-        (  <Redirect to ="/home"></Redirect>
+        ( <Redirect to ="/home"> </Redirect>
       ) : ( 
     <Formulario
       greeting = "Crea tu cuenta de NoteWithMe"
@@ -87,6 +99,8 @@ const handleGoogle = () => {
       handleGoogle = {handleGoogle}
       emailError = {emailError}
       passwordError = {passwordError}
+      setDisplayName = {setDisplayName}
+      displayName = {displayName}
       />   
      )}
     </div>

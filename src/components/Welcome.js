@@ -3,42 +3,29 @@
 // imr - Import React
 
 import styles from '../CSS/Welcome.module.css'
-import imgIngresar from '../assets/botonIngresar.jpg'
-import imgRegistrarse from '../assets/botonRegistrarse.jpg'
 import { Link } from 'react-router-dom'
+import Login from './Login'
 
 export function Welcome(){
     return (
-        <div className={styles.welcome}>
-         <div className={styles.welcomeImage}>
+        <div className={styles.container}>
+         <div className={styles.containerTitle}>
            <div className={styles.title}>
-             <h1>NoteWithMe</h1>
+                <h1>NoteWithMe</h1>
+                <button>Quiero
+                  <span> registrarme</span>
+               </button>
            </div>
          </div>
-          <div className={styles.welcomeButtons}>
-            <div className={styles.containerButtons}>
-              <div className={styles.containerLogin}>
-                  <img src={imgIngresar} alt="Imagen de fondo"/> 
-                  <h2 className={styles.textLogin}>¡Sigue viajando con nosotros!</h2>
-                  <Link to="/login">
-                    <h1 className={styles.titleLogin}>Ingresar</h1>
-                  </Link>
-              </div> 
-              <div className = {styles.containerRegister}>
-                  <img src={imgRegistrarse} alt="Imagen de fondo"/> 
-                  <h2 className={styles.textRegister}>¡Empieza a viajar con nosotros!</h2>
-                  <Link to ="/signup">
-                    <h1 className={styles.titleRegister}>Registrarse</h1>
-                  </Link>
-              </div >
-              <div className = {styles.about}>
-                <Link to ="/about">
-                  <button>About NoteWithMe</button> 
-                </Link>
-                </div>
-            </div>
-            
+          <div className={styles.login}>
+            <Login>
+            </Login>
           </div> 
+          <div className={styles.register}>
+            <button>Quiero
+              <span> registrarme</span>
+            </button>
+          </div>
         </div>
     )
 }

@@ -54,6 +54,7 @@ const Login = () => {
           }
 
 
+
     const listenerAuth = () => {
         authListener((user) => {
             if(user){
@@ -78,9 +79,8 @@ const Login = () => {
         //  <Home handleLogout = {handleLogout}/>
           ) : (
             <Formulario
-            greeting = "Ingresa a tu note NoteWithMe "
+            greeting = "Ingresa a tu cuenta"
             btnLabel = "Ingresar"
-            image = {img}
             email={email}
             setEmail={setEmail} 
             password={password} 

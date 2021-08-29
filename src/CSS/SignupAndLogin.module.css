@@ -1,4 +1,132 @@
-.formLogin{
+.containerForm{
+    display: grid;
+    height:80vh;
+    width: 100%;
+    grid-template-columns:100%;
+    grid-template-rows: 15% 55% 15% 15%;
+    background-color: #7ECA9C;
+}
+
+.containerForm h1 {
+    font-size: 1.2em;
+    align-self: center;
+}
+
+.itemsForm {
+    height:100%;
+    width: 100%;
+    grid-row-start:2;
+    grid-row-end:3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.itemsForm input{
+    width: 60%;
+    height: 15%;
+    border-radius: 3px;
+    background: #C4C4C4;
+    border: 2px solid #a7a7a7;
+    box-sizing: border-box;
+    margin-bottom: 0.5em;
+}
+
+.itemsForm button {
+    width: 60%;
+    height: 12%;
+    background: #1C1427;
+    border-radius: 3px;
+    color: white;
+    margin-bottom: 0.5em;
+}
+
+.itemsForm a{
+    color: black;
+}
+
+.itemsForm a:hover {
+    color: rgb(255, 255, 255);
+}
+
+.providers {
+    display: flex;
+    justify-content: center;
+}
+
+.providers button {
+    max-width: 4em;
+    height: 2.5em;
+    background: #1C1427;
+    border-radius: 3px;
+    color: white;
+    display: inline;
+}
+
+.providers p{
+    align-self: center;
+    margin-right: 1em;
+}
+
+@media (min-width: 800px) {
+    .containerForm{
+        grid-template-columns:100%;
+        grid-template-rows: 10% 15% 50% 15% 10%;
+        background-color: #7ECA9C;
+    }
+
+    .containerForm h1 {
+        grid-row-start:2;
+        grid-row-end:3;
+        font-size: 1.2em;
+        align-self: flex-end;
+    }
+    
+    .itemsForm input{
+        width: 50%;
+        height: 15%;
+        text-align: center;
+    }
+
+    .itemsForm button {
+        width: 50%;
+        height: 12%;
+    }
+
+    .itemsForm {
+        height:100%;
+        width: 100%;
+        grid-row-start:3;
+        grid-row-end:4;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .providers {
+        grid-row-start:4;
+        grid-row-end:5;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* .formLogin{
     display: flex;
     height: 100vh;
     width: 100%;
@@ -66,4 +194,4 @@
 .providers button {
     padding-left: 2.5em;
 }
-
+ */

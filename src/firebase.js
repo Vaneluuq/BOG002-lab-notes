@@ -18,5 +18,7 @@ import 'firebase/firestore'
   const google = new firebase.auth.GoogleAuthProvider()
   const db = fb.firestore();
 
+     
+
 
   export { fb, google, db } 

@@ -12,7 +12,12 @@ const loginWithGoogle = () => fb.auth().signInWithPopup(google)
 
 const authListener = (callback) => fb.auth().onAuthStateChanged(callback)
 
+const listenToAuthState = (onLogIn, onLogOut, callback) => 
+fb.auth().onAuthStateChanged(callback)
 
+
+const user = fb.auth().currentUser;
+console.log(user)
 
 // firestore 
 
@@ -29,6 +34,6 @@ const getIdNote =(id) => db.collection("notes").doc(id).get()
 
 
 export { handleLogout, loginUser, loginWithGoogle, authListener, createUser,
-getNotes, createNotes, editingNote , deleteNote, getIdNote}
+getNotes, createNotes, editingNote , deleteNote, getIdNote, listenToAuthState}
 
 

@@ -10,13 +10,6 @@
     transition: all .5s;
 }
 
-.button i {
-    display: block;
-    position: absolute;
-    bottom: 0.1em;
-    left: 0.5em;
-}
-
 .button:hover {
     background-color: rgb(214, 212, 91);
 } 

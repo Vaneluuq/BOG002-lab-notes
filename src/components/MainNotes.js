@@ -7,6 +7,7 @@ import Modal from 'react-modal';
 import { toast } from 'react-toastify';
 
 
+
 Modal.setAppElement('#root');
 
 const customStyles = {
@@ -36,7 +37,9 @@ const MainNotes = (props) => {
     const [searchNote, setSearchNote] = useState("");
     const [optionSearchNote, setOptionSearchNote] = useState("titleOption");
 
-  
+   
+
+
     //se crea o edita nota 
     const addNotesCollection = async (notesObj) => { 
       if(existId ===""){   

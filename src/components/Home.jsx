@@ -2,12 +2,15 @@ import React from 'react'
 import Sidebar from './Sidebar'
 import MainNotes from './MainNotes'
 import HomeCSS from '../CSS/Home.module.css'
-import { handleLogout} from './firebaseAuth'
+import { handleLogout, listenToAuthState, loginUser} from './firebaseAuth'
 import { Link } from 'react-router-dom';
 
 
 
 export default function Home() {
+
+  // listenToAuthState(() => user => user ? loginUser(user) : handleLogout())
+
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
 
@@ -38,7 +41,7 @@ export default function Home() {
               closeModal= { closeModal}
               openModal = {openModal}
             />
-          </div>       
+          </div>   
    </div>
   )
 }
