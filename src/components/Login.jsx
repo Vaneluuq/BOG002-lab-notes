@@ -11,6 +11,7 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const [emailError, setEmailError] = useState("");
     const [passwordError, setPasswordError] = useState("")
+    const [nameUser, setNameUser] = useState(false)
 
 
     //Se limpia data contenida en inputs
@@ -89,6 +90,7 @@ const Login = () => {
             emailError = {emailError}
             passwordError = {passwordError}
             handleGoogle = {handleGoogle}
+            nameUser = {nameUser}
             />  
           )
          }

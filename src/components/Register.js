@@ -14,6 +14,7 @@ const Register = () => {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("")
   const [displayName, setDisplayName] = useState("")
+  const [nameUser, setNameUser] = useState(true)
 
 
   const clearInput= () => {
@@ -101,6 +102,7 @@ const handleGoogle = () => {
       passwordError = {passwordError}
       setDisplayName = {setDisplayName}
       displayName = {displayName}
+      nameUser = {nameUser}
       />   
      )}
     </div>

@@ -2,6 +2,7 @@ import React from 'react'
 import LoginCSS from '../CSS/SignupAndLogin.module.css'
 import Button from './Botones';
 
+
 const Formulario = (props) => {
    const {
     email,
@@ -16,7 +17,8 @@ const Formulario = (props) => {
     greeting,
     image,
     displayName, 
-    setDisplayName
+    setDisplayName, 
+    nameUser
 } = props
 
 // Se escuchan los cambios ocurridos en inputs
@@ -35,12 +37,19 @@ const Formulario = (props) => {
                     <input type="password" placeholder="Password" required
                             value={password} onChange={passwordChange}/>
                     <p className={LoginCSS.errorMsg}>{passwordError}</p> 
-                    <input type="text" placeholder="Nombre de Usuario"
+                    { nameUser ? (<input type="text" placeholder="Nombre de Usuario"
                             value={displayName} onChange={userChange}/>
+                        ):(
+                            <> </>
+                        )}
                     <Button onClick = {handleOption} 
                         type = "submit"
                         btnname = {btnLabel}/>
-                    <a href="">Olvide mi contraseña</a>
+                       { !nameUser ? (
+                           <a href="">Olvide mi contraseña</a>
+                        ):(
+                           <> </>
+                        )}
                 </form> 
                 <div className={LoginCSS.providers}>
                     <p>Ó Continuar con</p>
