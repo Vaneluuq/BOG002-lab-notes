@@ -103,6 +103,7 @@ const handleGoogle = () => {
       setDisplayName = {setDisplayName}
       displayName = {displayName}
       nameUser = {nameUser}
+      setNameUser = {setNameUser}
       />   
      )}
     </div>

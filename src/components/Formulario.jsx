@@ -15,7 +15,6 @@ const Formulario = (props) => {
     passwordError, 
     btnLabel,
     greeting,
-    image,
     displayName, 
     setDisplayName, 
     nameUser
@@ -46,7 +45,7 @@ const Formulario = (props) => {
                         type = "submit"
                         btnname = {btnLabel}/>
                        { !nameUser ? (
-                           <a href="">Olvide mi contraseña</a>
+                           <a href="/login">Olvide mi contraseña</a>
                         ):(
                            <> </>
                         )}

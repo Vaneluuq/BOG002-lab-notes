@@ -1,5 +1,4 @@
 import React from 'react'
-import img from "../assets/login2.jpg"
 import Formulario from './Formulario'
 import { useState, useEffect } from 'react';
 import {loginUser, loginWithGoogle, authListener } from './firebaseAuth';
@@ -42,6 +41,7 @@ const Login = () => {
             case "auth/wrong-password":
                 setPasswordError(err.message)
                 break;
+            
         }
     })
 }
@@ -91,6 +91,7 @@ const Login = () => {
             passwordError = {passwordError}
             handleGoogle = {handleGoogle}
             nameUser = {nameUser}
+            setNameUser = {setNameUser}
             />  
           )
          }

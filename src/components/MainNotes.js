@@ -1,12 +1,11 @@
-import React, { useState, useEffect, Fragment } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import NotesCSS from '../CSS/MainNotes.module.css'
 import Notes from './Notes';
-import { createNotes, editingNote, getNotes,  deleteNote } from './firebaseAuth'
+import { createNotes, editingNote, getNotes,  deleteNote} from './firebaseAuth'
 import swal from 'sweetalert'
 import Modal from 'react-modal';
 import { toast } from 'react-toastify';
-
-
+import SearchBar from './Search'
 
 Modal.setAppElement('#root');
 
@@ -25,6 +24,10 @@ const customStyles = {
   },
 };
 
+const colors = ["Orangered","Blue","Green","DodgerBlue", "Violet", "Navy", "Purple", "YellowGreen", "OrangeRed", "SlateBlue", "Salmon", "Crimson", "HotPink", "Magenta"];
+
+
+
 const MainNotes = (props) => {
     const {
       modalIsOpen, 
@@ -36,8 +39,8 @@ const MainNotes = (props) => {
     const [existId, setExistId] = useState("");
     const [searchNote, setSearchNote] = useState("");
     const [optionSearchNote, setOptionSearchNote] = useState("titleOption");
+    const [colorNote, setColorNote] = useState("");
 
-   
 
 
     //se crea o edita nota 
@@ -68,10 +71,7 @@ const MainNotes = (props) => {
       }
     };
     
-    // Se escuchan los cambios ocurridos en el input de busqueda y select con opciones de busqueda 
-    const inputChange = (e) => setSearchNote(e.target.value);
-    const selectChange =(e) => setOptionSearchNote(e.target.value)
-    
+  
     
     // Se muestran las notas existentes en firestore 
     const getNotesToScreen = async () => {
@@ -90,6 +90,7 @@ const MainNotes = (props) => {
       useEffect(() => {
         getNotesToScreen() 
     }, []); 
+
 
     
    // Se eliminan las notas 
@@ -111,59 +112,58 @@ const MainNotes = (props) => {
     }
 
 
+  // Se cambian de color las notas 
+    let box = useRef();
+    const handleClick = (id) => {
+        const random = Math.floor(Math.random()*colors.length);
+        let newColor = box.current.style.backgroundColor = colors[random];
+        setColorNote(newColor)
+      };
 
+    
     return (  
     <div className={NotesCSS.containerMain}>
-      <div className={NotesCSS.search}>
-        <select id="optionSearch" name="options" value={optionSearchNote} onChange={selectChange}>
-          <option value="titleOption">Titulo de la nota</option>
-          <option value="bodyOption">Cuerpo de la nota</option>
-          <option value="timeOption">Fecha de la nota</option>
-        </select>
-        <input type="text" placeholder="Buscar mi nota"  
-            value={searchNote} onChange={inputChange} onKeyUp={getNotesToScreen}/>    
-        <button type="button"><i class="fas fa-search"></i></button>
-      </div>
-     <div className={NotesCSS.containerMainNotes}>
-      { modalIsOpen 
-        ? ( <Modal
-          isOpen={modalIsOpen}
-          style={customStyles}
-          onRequestClose={closeModal}>
-          <Notes
-            addNotesCollection = {addNotesCollection}
-            closeModal= { closeModal}
-            existId ={existId}
-           />
-        </Modal>
-        ):(
-          notes.map((note)=>( 
-          <>
-          <div className={NotesCSS.showNotesContainer} key={note.id}>
-            <div className={NotesCSS.showNotes}>
-              <div>
+      <SearchBar
+        searchNote = {searchNote}
+        setSearchNote = {setSearchNote}
+        optionSearchNote = {optionSearchNote}
+        setOptionSearchNote = {setOptionSearchNote}
+        getNotesToScreen = {getNotesToScreen}
+        />
+      <div className={NotesCSS.containerMainNotes}>
+        { modalIsOpen ? 
+          ( <Modal
+              isOpen={modalIsOpen}
+              style={customStyles}
+              onRequestClose={closeModal}>
+              <Notes
+                addNotesCollection = {addNotesCollection}
+                closeModal= { closeModal}
+                existId ={existId}
+              />
+            </Modal>
+          ):(
+            notes.map((note)=>( 
+              <div id="showNotesContainer" key={note.id} className={NotesCSS.showNotesContainer} ref={box} style={{backgroundColor: colorNote}}>
                 <h2 className={NotesCSS.title}>{note.title}</h2>
                 <h3 className={NotesCSS.body}>{note.body}</h3>
                 <div  className={NotesCSS.editContainer}>
-                    <button onClick={() =>openModal(setExistId(note.id))}>
-                      <i class= "far fa-edit"></i></button>
-                    <button onClick={() => deleteNotes(note.id)}>
-                      <i class="fas fa-trash"></i></button>
-                    <button onClick={() => deleteNotes(note.id)}>
-                      <i class="fas fa-address-book"></i></button>
-                    <p>{note.lastModified}</p>
+                  <button onClick={() =>openModal(setExistId(note.id))}>
+                    <i className= "far fa-edit"></i></button>
+                  <button onClick={() => deleteNotes(note.id)}>
+                    <i className="fas fa-trash"></i></button>
+                  <button onClick={() => handleClick(note.id)}>
+                    <i className="fas fa-address-book"></i></button>
+                  <p>{note.lastModified}</p>
                 </div>
               </div>
-            </div>
-          </div>
-          </>
-          ))
-        )
+            ))
+           )
         }
-    </div>
+      </div>
     </div>
   )
-}
+};
      
 
  
@@ -171,8 +171,9 @@ export default MainNotes
 
 
 
-
-
+//cambiar el color notas 
+//añadir user name 
+// verificar solo lectura para una persona 
 
 
 

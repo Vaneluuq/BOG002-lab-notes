@@ -36,10 +36,8 @@ export function Welcome(){
             }
          </div>
          <div className={styles.about}>
-            <Link to ="/about">
-              <a href="">Conoce mas de <span>NoteWithMe</span></a>
-              <p>@Vaneluuq</p>
-            </Link>    
+            <Link id="RouterNavLink" to="/about">Conoce mas de <span>NoteWithMe</span></Link>
+            <p>@Vaneluuq</p>
           </div> 
         </div>
   )

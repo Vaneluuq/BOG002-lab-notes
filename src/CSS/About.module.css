@@ -1,48 +1,113 @@
 .container {
-    display: grid;
+    display: flex;
     height:100vh;
     width: 100%;
-    grid-template: repeat(20, 1fr) / repeat(20, 1fr);
-    grid-auto-flow: column; 
     background: #DBDBDB;
+    flex-wrap: wrap;
 }
 
-.boxPropuse{
-    grid-row-start:2;
-    grid-column-start:3;
-    grid-column-end:12; 
-    background: #7ECA9C;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
+.boxPropuse {
     width: 100%;
-    height:auto;
+    height: auto;
+    background: #7ECA9C;
+    font-size: 1.5em;
+    text-align: center;
 }
-
 .boxPropuse h2 {
-    font-size: 2.5em;
-    padding: .5em;
-}
-
-.boxPropuse p {
-    font-size: 2.5vh;
-    padding: 0em 1.7em 1.7em 1em;
+    padding-bottom: .5em;
+    padding-top: .5em;
 }
 
 .boxUsage {
-    grid-row-start:3;
-    grid-column-start:11;
-    grid-column-end:20;
     background: #CCFFBD ;
+    font-size: 1.5em;
+    text-align: center;
     width: 100%;
-    height:auto;
-}
-.boxUsage h2 {
-    font-size: 2.5em;
-    padding: .5em;
+    height: auto;
 }
 
-.boxUsage p {
-    font-size: 2.5vh;
-    padding: 0em 1.7em 1.7em 1em;
+.boxUsage h2 {
+    padding-bottom: .5em;
+    padding-top: .5em;
+} 
+
+.boxTres {
+    background: rgb(210, 192, 30);
+    width: 100%;
+}
+
+.boxCuatro {
+    background: rgb(210, 192, 30);
+    width: 100%;
+}
+
+
+@media (min-width: 750px) { 
+    .container {
+        display: grid;
+        height:100vh;
+        width: 100%;
+        grid-template: repeat(20, 1fr) / repeat(20, 1fr);
+        background: #DBDBDB;
+    }
+    
+    .boxPropuse{
+        grid-row-start:2;
+        grid-row-end: 9;
+        grid-column-start:2;
+        grid-column-end:13; 
+        background: #7ECA9C;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height:auto;
+        padding: 1vw 4vw;
+    }
+    
+    .boxPropuse h2 {
+        font-size: 1.8em;
+    }
+    
+    .boxPropuse p {
+        font-size: 2.5vh;
+    }
+    
+    .boxUsage {
+        grid-row-start:6;
+        grid-row-end: 15;
+        grid-column-start:12;
+        grid-column-end:20;
+        background: #CCFFBD ;
+        width: 100%;
+        height:auto;
+        padding: 1vw 4vw;
+    }
+    .boxUsage h2 {
+        font-size: 1.8em;
+    }
+    
+    .boxUsage p {
+        font-size: 2.5vh;
+    }
+
+    .boxCuatro {
+        width: 100%;
+        grid-row-start:13;
+        grid-row-end: 20;
+        grid-column-start:5;
+        grid-column-end:13; 
+        background: rgb(210, 192, 30);
+    }
+
+    .boxTres {
+        width: 100%;
+        grid-row-start:1;
+        grid-row-end: 8;
+        grid-column-start:17;
+        grid-column-end:21; 
+        background: rgb(210, 192, 30);
+    }
+    
+
 }

@@ -1,7 +1,7 @@
 .notesMain {
     width: 20em;
     height: 18em;
-    background: #8FA677;
+    background-color: #7ECA9C;
     display: flex;
     text-align: center;
     flex-direction: column;
@@ -35,7 +35,7 @@
     width: 90%;
     border: none;
     height: 15%;
-    background: #8FA677;
+    background-color: #7ECA9C;
     padding: 1em;
     text-align: center;
     margin-top: 5%;
@@ -45,7 +45,8 @@
     width: 90%;
     border: none;
     height: 70%;
-    background: #8FA677;
+    background-color: #7ECA9C;
     padding: 1em;
     text-align: center;
+    border-top: white solid 0.1em;
 }

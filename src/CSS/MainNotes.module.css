@@ -1,53 +1,16 @@
 .containerMain{
-    background: #B4BD7E;
     width: 100%;
     height: 100vh;
-    overflow: scroll;
     display: grid;
     grid-template-columns: 100%;
     grid-template-rows: 10% 90%;
-
+    background: rgb(222, 226, 207);
+    overflow: scroll;
 }
-
-.search{
-    grid-row-start:1;
-    grid-row-end: 2;
-    margin-top: 1em; 
-    text-align: center;
-}
-
-.search input {
-    background-color: #77a68488;
-    width: 35%;
-    height: 50%;
-    border: none;
-    font-size: 1em;
-    text-align: center;
-}
-
-.search select {
-    background-color: #77a68488;
-    width: 10%;
-    height: 51%;
-    border: none;
-    font-size: 0.8em;
-    border-right: 0.1em rgb(178, 202, 158) solid;
-    cursor: pointer;
-}
-
-.search button {
-    background-color: #77a68488;
-    justify-self: center;
-    height: 51%;
-    width: 5%;
-    border-left: 0.1em rgb(178, 202, 158) solid;
-    border-bottom: none;
-    border-top: none;
-    border-right: none;
-}
-
 
 .containerMainNotes{
+    width: 100%;
+    height: 100%;
     grid-row-start:2;
     grid-row-end: 3;
     display: flex;
@@ -55,33 +18,68 @@
 }
 
 .showNotesContainer{
-    width: 18em;
+    width: 100%;
     height: 16em;
-    background: #8FA677;
-    margin: 2em 1em;
+    background: #7ECA9C;
+    margin: 0.5em 1em;
     text-align: center;
-    cursor: pointer;
     position: relative;
     border-radius: 5px;
     box-shadow: 5px 5px 5px 1px rgba(0, 0, 0, 0.2)
 }
 
+.search{
+    width: 100%;
+    height: 100%;
+    grid-row-start:1;
+    grid-row-end: 2;
+    margin-top: 1em; 
+    text-align: center;
+    justify-content: center;
+}
+
+.search input {
+    background-color: #77a68488;
+    width: 60%;
+    height: 2em;
+    border: none;
+    text-align: center;
+}
+
+.search select {
+    background-color: #77a68488;
+    width: 20%;
+    height: 2em;
+    border: none;
+    border-right: 0.1em rgb(178, 202, 158) solid;
+}
+
+.search button {
+    background-color: #77a68488;
+    justify-self: center;
+    width: 3em;
+    height: 2em;
+    border-left: 0.1em rgb(178, 202, 158) solid;
+    border-bottom: none;
+    border-top: none;
+    border-right: none;
+}
+
 .title {
-    margin: 0.5em;
     font-size: 1.3em;
     padding: 0.5em;
     border-bottom:solid 1px rgb(220, 233, 206);
-    color: rgb(220, 233, 206);
+    color: rgb(233, 240, 227);
 }
 
 .body {
-    color: rgb(220, 233, 206);
+    color: rgb(233, 240, 227);
     font-size: 1em;
 }
 
 .editContainer{
     position: absolute;
-    background-color: rgb(220, 233, 206);
+    background-color: rgb(208, 214, 202);
     bottom: 0;
     width: 100%;
     height: 15%;
@@ -98,11 +96,7 @@
 }
 
 .editContainer button {
-    margin: 0.5em;
-    width: 2em;
-    height: 2em;
-    justify-self: center;
-    border: #8FA677 solid 1px;
+    border: #535353 solid 1px;
 }
 
 .editContainer button:first-child {
@@ -113,3 +107,61 @@
     grid-column-start: 2;
 }
 
+
+@media (min-width: 750px){
+.containerMain{
+    overflow: scroll;
+}
+
+.containerMainNotes{
+    justify-content: space-around;
+}
+
+.showNotesContainer{
+    width: 18em;
+    margin: 2em 1em;
+}
+
+.search input {
+    width: 20em;
+    height: 3em;
+}
+
+.search select {
+    width: 11em;
+    height: 3em;
+    cursor: pointer;
+}
+
+.search button {
+    height: 3em;
+}
+
+
+.title {
+    margin: 0.5em;
+}
+
+.editContainer p{
+    grid-column-start: 4;
+    font-size: 1em;
+    justify-self: center;
+    align-self: center;
+}
+
+.editContainer button {
+    width: 3em;
+    height: 3em;
+    justify-self: center;
+    border: rgb(103, 105, 101)solid 1px;
+    cursor: pointer;
+}
+
+.editContainer button:first-child {
+    grid-column-start: 1;
+}
+
+.editContainer button:nth-child(2) {
+    grid-column-start: 2;
+}
+}
